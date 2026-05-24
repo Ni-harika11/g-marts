@@ -25,13 +25,13 @@
        ROOT & RESET
     ══════════════════════════════════ */
     :root {
-      --bg: #0b1120;
-      --bg2: #0f172a;
-      --bg3: #1a2540;
-      --primary: #7c3aed;
-      --pri-light: #a855f7;
-      --secondary: #06b6d4;
-      --accent: #f59e0b;
+      --bg: #0f0808;
+      --bg2: #150b0b;
+      --bg3: #221010;
+      --primary: #dc2626;
+      --pri-light: #ef4444;
+      --secondary: #f97316;
+      --accent: #fbbf24;
       --white: #f1f5f9;
       --gray: #8897b3;
       --glass: rgba(255, 255, 255, 0.04);
@@ -111,7 +111,7 @@
     #cur-ring {
       width: 34px;
       height: 34px;
-      border: 1.5px solid rgba(168, 85, 247, .45);
+      border: 1.5px solid rgba(239, 68, 68, .45);
       border-radius: 50%;
       position: fixed;
       pointer-events: none;
@@ -236,7 +236,7 @@
 
     #nav.scrolled {
       padding: 10px 0;
-      background: rgba(11, 17, 32, .88);
+      background: rgba(15, 8, 8, .88);
       backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
       border-bottom: 1px solid var(--gborder);
@@ -297,13 +297,13 @@
       color: #fff !important;
       font-weight: 600;
       font-size: .85rem;
-      box-shadow: 0 0 20px rgba(124, 58, 237, .35);
+      box-shadow: 0 0 20px rgba(220, 38, 38, .35);
       transition: all .3s
     }
 
     .nav-cta:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(124, 58, 237, .6)
+      box-shadow: 0 0 30px rgba(220, 38, 38, .6)
     }
 
     .nav-cta::after {
@@ -346,7 +346,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(11, 17, 32, .97);
+      background: rgba(15, 8, 8, .97);
       backdrop-filter: blur(20px);
       z-index: 999;
       flex-direction: column;
@@ -496,14 +496,14 @@
     }
 
     .btn-pri {
-      background: linear-gradient(135deg, var(--primary), #5b21b6);
+      background: linear-gradient(135deg, var(--primary), #991b1b);
       color: #fff;
-      box-shadow: 0 0 28px rgba(124, 58, 237, .45)
+      box-shadow: 0 0 28px rgba(220, 38, 38, .45)
     }
 
     .btn-pri:hover {
       transform: translateY(-3px);
-      box-shadow: 0 0 44px rgba(124, 58, 237, .65)
+      box-shadow: 0 0 44px rgba(220, 38, 38, .65)
     }
 
     .btn-out {
@@ -519,14 +519,14 @@
     }
 
     .btn-sec {
-      background: linear-gradient(135deg, var(--secondary), #0891b2);
+      background: linear-gradient(135deg, var(--secondary), #c2410c);
       color: #fff;
-      box-shadow: 0 0 28px rgba(6, 182, 212, .35)
+      box-shadow: 0 0 28px rgba(249, 115, 22, .35)
     }
 
     .btn-sec:hover {
       transform: translateY(-3px);
-      box-shadow: 0 0 44px rgba(6, 182, 212, .6)
+      box-shadow: 0 0 44px rgba(249, 115, 22, .6)
     }
 
     /* ══════════════════════════════════
@@ -543,13 +543,13 @@
     .h-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 65% 40%, rgba(124, 58, 237, .16) 0%, transparent 60%), radial-gradient(ellipse 55% 45% at 15% 65%, rgba(6, 182, 212, .1) 0%, transparent 60%)
+      background: radial-gradient(ellipse 80% 60% at 65% 40%, rgba(220, 38, 38, .16) 0%, transparent 60%), radial-gradient(ellipse 55% 45% at 15% 65%, rgba(249, 115, 22, .1) 0%, transparent 60%)
     }
 
     .h-grid {
       position: absolute;
       inset: 0;
-      background-image: linear-gradient(rgba(124, 58, 237, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, .035) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(220, 38, 38, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(220, 38, 38, .035) 1px, transparent 1px);
       background-size: 56px 56px;
       pointer-events: none
     }
@@ -571,7 +571,7 @@
     .b1 {
       width: 380px;
       height: 380px;
-      background: rgba(124, 58, 237, .13);
+      background: rgba(220, 38, 38, .13);
       top: 8%;
       right: 4%;
       animation-delay: 0s
@@ -580,7 +580,7 @@
     .b2 {
       width: 280px;
       height: 280px;
-      background: rgba(6, 182, 212, .09);
+      background: rgba(249, 115, 22, .09);
       bottom: 18%;
       left: 3%;
       animation-delay: -3.5s
@@ -729,8 +729,8 @@
     }
 
     .h-stat:hover {
-      border-color: rgba(124, 58, 237, .35);
-      box-shadow: 0 0 30px rgba(124, 58, 237, .3);
+      border-color: rgba(220, 38, 38, .35);
+      box-shadow: 0 0 30px rgba(220, 38, 38, .3);
       transform: translateY(-4px)
     }
 
@@ -757,7 +757,7 @@
       border-top: 1px solid var(--gborder);
       border-bottom: 1px solid var(--gborder);
       padding: 14px 0;
-      background: rgba(124, 58, 237, .04)
+      background: rgba(220, 38, 38, .04)
     }
 
     .ticker-track {
@@ -839,7 +839,7 @@
       position: absolute;
       inset: 0;
       opacity: 0;
-      background: linear-gradient(135deg, rgba(124, 58, 237, .07), rgba(6, 182, 212, .04));
+      background: linear-gradient(135deg, rgba(220, 38, 38, .07), rgba(249, 115, 22, .04));
       transition: opacity .4s
     }
 
@@ -848,9 +848,9 @@
     }
 
     .svc-card:hover {
-      border-color: rgba(124, 58, 237, .3);
+      border-color: rgba(220, 38, 38, .3);
       transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .35), 0 0 40px rgba(124, 58, 237, .2)
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .35), 0 0 40px rgba(220, 38, 38, .2)
     }
 
     .svc-n {
@@ -870,8 +870,8 @@
       height: 56px;
       border-radius: 14px;
       margin-bottom: 18px;
-      background: linear-gradient(135deg, rgba(124, 58, 237, .22), rgba(6, 182, 212, .1));
-      border: 1px solid rgba(124, 58, 237, .2);
+      background: linear-gradient(135deg, rgba(220, 38, 38, .22), rgba(249, 115, 22, .1));
+      border: 1px solid rgba(220, 38, 38, .2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -953,7 +953,7 @@
       font-size: .82rem;
       font-weight: 800;
       font-family: 'Space Mono', monospace;
-      box-shadow: 0 0 20px rgba(124, 58, 237, .4)
+      box-shadow: 0 0 20px rgba(220, 38, 38, .4)
     }
 
     .p-title {
@@ -989,7 +989,7 @@
 
     .vis-wrap {
       border-radius: 24px;
-      background: linear-gradient(135deg, rgba(124, 58, 237, .12), rgba(6, 182, 212, .07));
+      background: linear-gradient(135deg, rgba(220, 38, 38, .12), rgba(249, 115, 22, .07));
       border: 1px solid var(--gborder);
       aspect-ratio: 1;
       display: flex;
@@ -1002,7 +1002,7 @@
     .vis-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, rgba(124, 58, 237, .15), transparent 70%)
+      background: radial-gradient(ellipse at center, rgba(220, 38, 38, .15), transparent 70%)
     }
 
     .vis-svg {
@@ -1060,7 +1060,7 @@
     }
 
     .feat:hover {
-      border-color: rgba(124, 58, 237, .3);
+      border-color: rgba(220, 38, 38, .3);
       transform: translateX(5px)
     }
 
@@ -1114,8 +1114,8 @@
     /* cta band */
     .cta-band {
       border-radius: 22px;
-      background: linear-gradient(135deg, rgba(124, 58, 237, .14), rgba(6, 182, 212, .09));
-      border: 1px solid rgba(124, 58, 237, .2);
+      background: linear-gradient(135deg, rgba(220, 38, 38, .14), rgba(249, 115, 22, .09));
+      border: 1px solid rgba(220, 38, 38, .2);
       padding: 56px 48px;
       text-align: center;
       margin-top: 80px
@@ -1180,7 +1180,7 @@
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       border-color: transparent;
       color: #fff;
-      box-shadow: 0 0 18px rgba(124, 58, 237, .35)
+      box-shadow: 0 0 18px rgba(220, 38, 38, .35)
     }
 
     .pgrid {
@@ -1217,7 +1217,7 @@
       position: absolute;
       inset: 0;
       opacity: 0;
-      background: linear-gradient(135deg, rgba(124, 58, 237, .85), rgba(6, 182, 212, .7));
+      background: linear-gradient(135deg, rgba(220, 38, 38, .85), rgba(249, 115, 22, .7));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1314,7 +1314,7 @@
       top: 12px;
       right: 20px;
       font-size: 5rem;
-      color: rgba(124, 58, 237, .08);
+      color: rgba(220, 38, 38, .08);
       font-family: serif;
       line-height: 1
     }
@@ -1441,8 +1441,8 @@
       height: 46px;
       border-radius: 12px;
       flex-shrink: 0;
-      background: linear-gradient(135deg, rgba(124, 58, 237, .2), rgba(6, 182, 212, .1));
-      border: 1px solid rgba(124, 58, 237, .2);
+      background: linear-gradient(135deg, rgba(220, 38, 38, .2), rgba(249, 115, 22, .1));
+      border: 1px solid rgba(220, 38, 38, .2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1528,7 +1528,7 @@
     .fg textarea:focus,
     .fg select:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(124, 58, 237, .13)
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, .13)
     }
 
     .fg textarea {
@@ -1581,7 +1581,7 @@
 
     .pop {
       background: var(--bg3);
-      border: 1px solid rgba(124, 58, 237, .3);
+      border: 1px solid rgba(220, 38, 38, .3);
       border-radius: 24px;
       padding: 44px;
       text-align: center;
@@ -1999,9 +1999,7 @@
   <!-- ─── FLOATING BTNS ─── -->
   <a id="wa" href="https://wa.me/917667189326" target="_blank" rel="noopener" title="WhatsApp">💬</a>
 
-  <button id="totop" onclick="scrollTo({top:0,behavior:'smooth'})" title="Back to top">
-    ↑
-  </button>
+  <button id="totop" onclick="scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
   <!-- ══════════════════════════════════
      NAVBAR
 ══════════════════════════════════ -->
@@ -2464,7 +2462,7 @@
             <p class="tm-text">"The brand identity they created was beyond what we imagined. Every detail was
               intentional and our logo has become instantly recognizable. Absolutely recommend them."</p>
             <div class="tm-author">
-              <div class="tm-av" style="background:linear-gradient(135deg,var(--secondary),#0891b2)">S</div>
+              <div class="tm-av" style="background:linear-gradient(135deg,var(--secondary),#c2410c)">S</div>
               <div>
                 <div class="tm-name">Sarah Chen</div>
                 <div class="tm-role">Founder, Luminary Studio</div>
@@ -2521,14 +2519,14 @@
               <div class="con-ico">📧</div>
               <div>
                 <div class="con-it">Email Address</div>
-                <div class="con-iv">hello@graphicsmart.agency</div>
+                <div class="con-iv">malikniharika048@gmail.com</div>
               </div>
             </div>
             <div class="con-item">
               <div class="con-ico">📞</div>
               <div>
                 <div class="con-it">Phone Number</div>
-                <div class="con-iv">+1 (555) 000-0000</div>
+                <div class="con-iv">+19 6280173629</div>
               </div>
             </div>
             <div class="con-item">
@@ -2708,7 +2706,7 @@
       let W, H, pts = [];
       function resize() { W = cv.width = cv.offsetWidth; H = cv.height = cv.offsetHeight }
       resize(); window.addEventListener('resize', () => { resize(); init() }, { passive: true });
-      function init() { pts = []; for (let i = 0; i < 70; i++)pts.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + .4, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35, a: Math.random() * .4 + .08, c: Math.random() > .5 ? '124,58,237' : '6,182,212' }) }
+      function init() { pts = []; for (let i = 0; i < 70; i++)pts.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + .4, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35, a: Math.random() * .4 + .08, c: Math.random() > .5 ? '220,38,38' : '249,115,22' }) }
       init();
       function draw() {
         ctx.clearRect(0, 0, W, H);
@@ -2797,7 +2795,17 @@
       window.addEventListener('resize', () => goTo(ti));
 
       /* ─── CONTACT FORM ─── */
-      document.getElementById('cform').addEventListener('submit', function (e) {
+      const submitContactForm = async (submission) => {
+        const url = '/submit';
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(submission)
+        });
+        return response.json();
+      };
+
+      document.getElementById('cform').addEventListener('submit', async function (e) {
         e.preventDefault();
         const n = document.getElementById('fname'), em = document.getElementById('femail'), sv = document.getElementById('fservice'), msg = document.getElementById('fmsg');
         const sh = (id, s) => document.getElementById(id).classList.toggle('show', s);
@@ -2809,7 +2817,34 @@
         if (ok) {
           const btn = this.querySelector('.sub-btn');
           btn.textContent = 'Sending…'; btn.disabled = true;
-          setTimeout(() => { this.reset(); btn.textContent = 'Send Message →'; btn.disabled = false; document.getElementById('popup').classList.add('show') }, 1300);
+
+          const submission = {
+            name: n.value.trim(),
+            email: em.value.trim(),
+            service: sv.value,
+            message: msg.value.trim()
+          };
+
+          try {
+            const result = await submitContactForm(submission);
+            if (result.success) {
+              setTimeout(() => {
+                this.reset();
+                btn.textContent = 'Send Message →';
+                btn.disabled = false;
+                const popup = document.getElementById('popup');
+                if (popup) popup.classList.add('show');
+              }, 1300);
+            } else {
+              console.error('Save failed:', result.error);
+              btn.textContent = 'Send Message →'; btn.disabled = false;
+              alert('Unable to save message. Please try again.');
+            }
+          } catch (error) {
+            console.error('Submit error:', error);
+            btn.textContent = 'Send Message →'; btn.disabled = false;
+            alert('Unable to save message. Please check your server.');
+          }
         }
       });
     })();
