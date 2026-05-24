@@ -19,6 +19,10 @@ function writeSubmissions(data) {
   fs.writeFileSync(submissionsFile, JSON.stringify(data, null, 2) + '\n', 'utf8');
 }
 
+function createSubmissionId() {
+  return `id-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`;
+}
+
 function sendJson(res, status, payload) {
   res.writeHead(status, {
     'Content-Type': 'application/json',
@@ -42,7 +46,7 @@ const server = http.createServer((req, res) => {
       try {
         const payload = JSON.parse(body || '{}');
         const submission = {
-          id: `id-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`,
+          id: createSubmissionId(),
           name: String(payload.name || '').trim(),
           email: String(payload.email || '').trim(),
           service: String(payload.service || '').trim(),
