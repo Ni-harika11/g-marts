@@ -530,29 +530,20 @@
     }
 
     /* ══════════════════════════════════
-       HERO — PURE FULL COVER IMAGE
+       HERO
     ══════════════════════════════════ */
     #hero {
-      width: 100%;
-      height: 100vh;
-      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
       overflow: hidden;
-      padding: 0;
-      display: block
+      padding: 0
     }
 
-    .h-cover-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-      position: relative;
-      z-index: 0
-    }
-
-    @media(max-width: 600px) {
-      #hero { height: 70vh }
+    .h-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 65% 40%, rgba(220, 38, 38, .16) 0%, transparent 60%), radial-gradient(ellipse 55% 45% at 15% 65%, rgba(249, 115, 22, .1) 0%, transparent 60%)
     }
 
     .h-grid {
@@ -620,7 +611,13 @@
       }
     }
 
-    /* h-content defined in hero section above */
+    .h-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 24px 60px
+    }
 
     .h-badge {
       display: inline-flex;
@@ -1859,25 +1856,6 @@
         letter-spacing: -1px
       }
 
-      .h-content {
-        padding: 100px 24px 56px
-      }
-
-      .h-banner-floats {
-        position: static !important;
-        transform: none !important;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-top: 28px;
-        gap: 10px
-      }
-
-      .h-fcard {
-        min-width: calc(50% - 5px);
-        flex: 1;
-        animation: none !important
-      }
-
       .h-stats {
         gap: 10px
       }
@@ -1917,22 +1895,6 @@
 
       .h-content {
         padding: 100px 16px 48px
-      }
-
-      .h-banner-floats {
-        position: static !important;
-        transform: none !important;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        margin-top: 32px;
-        gap: 12px
-      }
-
-      .h-fcard {
-        min-width: 140px;
-        flex: 1;
-        animation: none !important
       }
 
       .h-cta {
@@ -1975,254 +1937,6 @@
         height: 38px;
         font-size: .9rem
       }
-    }
-    /* ══════════════════════════════════
-       INTRO SPLIT SECTION
-    ══════════════════════════════════ */
-    #intro {
-      padding: 100px 0;
-      background: var(--bg2);
-      overflow: hidden
-    }
-
-    .intro-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 64px
-    }
-
-    /* ── LEFT IMAGE ── */
-    .intro-img-wrap {
-      position: relative;
-      border-radius: 24px;
-      overflow: visible
-    }
-
-    .intro-img {
-      width: 100%;
-      height: 520px;
-      object-fit: cover;
-      object-position: center;
-      border-radius: 24px;
-      display: block;
-      box-shadow:
-        0 40px 80px rgba(0,0,0,.55),
-        0 0 0 1px rgba(255,255,255,.06)
-    }
-
-    /* red glow behind image */
-    .intro-img-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -20px;
-      border-radius: 32px;
-      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(220,38,38,.22) 0%, transparent 65%);
-      z-index: -1;
-      filter: blur(20px)
-    }
-
-    /* corner accent lines */
-    .intro-img-wrap::after {
-      content: '';
-      position: absolute;
-      top: -8px; left: -8px;
-      width: 80px; height: 80px;
-      border-top: 2.5px solid var(--primary);
-      border-left: 2.5px solid var(--primary);
-      border-radius: 8px 0 0 0;
-      pointer-events: none
-    }
-
-    .intro-img-corner-br {
-      position: absolute;
-      bottom: -8px; right: -8px;
-      width: 80px; height: 80px;
-      border-bottom: 2.5px solid var(--secondary);
-      border-right: 2.5px solid var(--secondary);
-      border-radius: 0 0 8px 0;
-      pointer-events: none
-    }
-
-    /* floating badge on image */
-    .intro-img-badge {
-      position: absolute;
-      bottom: 24px;
-      left: -20px;
-      background: rgba(10,3,3,.88);
-      border: 1px solid rgba(220,38,38,.35);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 14px;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.5);
-      animation: floatbadge 4s ease-in-out infinite
-    }
-
-    .intro-badge-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(220,38,38,.3), rgba(249,115,22,.2));
-      border: 1px solid rgba(220,38,38,.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.15rem;
-      flex-shrink: 0
-    }
-
-    .intro-badge-text-n {
-      font-size: 1.1rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #ef4444, #f97316);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1
-    }
-
-    .intro-badge-text-l {
-      font-size: .68rem;
-      color: var(--gray);
-      margin-top: 2px
-    }
-
-    /* top-right badge */
-    .intro-img-badge2 {
-      position: absolute;
-      top: 24px;
-      right: -20px;
-      background: rgba(10,3,3,.88);
-      border: 1px solid rgba(249,115,22,.3);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 14px;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.5);
-      animation: floatbadge 4s ease-in-out infinite 2s
-    }
-
-    .intro-live-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: #22c55e;
-      animation: pulse 2s infinite;
-      box-shadow: 0 0 8px rgba(34,197,94,.6)
-    }
-
-    .intro-img-badge2 span {
-      font-size: .72rem;
-      font-weight: 700;
-      color: var(--white)
-    }
-
-    /* ── RIGHT TEXT ── */
-    .intro-text {
-      display: flex;
-      flex-direction: column;
-      gap: 0
-    }
-
-    .intro-title {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 900;
-      line-height: 1.08;
-      letter-spacing: -1.5px;
-      margin-bottom: 22px
-    }
-
-    .intro-title .intro-grad {
-      background: linear-gradient(135deg, #ef4444 0%, #f97316 55%, #fbbf24 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text
-    }
-
-    .intro-desc {
-      font-size: 1.05rem;
-      color: var(--gray);
-      line-height: 1.9;
-      margin-bottom: 32px
-    }
-
-    /* highlight list */
-    .intro-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 36px
-    }
-
-    .intro-list-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: .9rem;
-      color: var(--white);
-      line-height: 1.6
-    }
-
-    .intro-list-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(220,38,38,.3), rgba(249,115,22,.2));
-      border: 1px solid rgba(220,38,38,.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .7rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-      color: #f97316
-    }
-
-    /* CTA row */
-    .intro-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center
-    }
-
-    .intro-rating {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: .8rem;
-      color: var(--gray)
-    }
-
-    .intro-stars {
-      color: #fbbf24;
-      font-size: .9rem;
-      letter-spacing: 1px
-    }
-
-    /* responsive */
-    @media(max-width: 900px) {
-      .intro-grid {
-        grid-template-columns: 1fr;
-        gap: 44px
-      }
-      .intro-img {
-        height: 340px
-      }
-      .intro-img-badge { left: 12px; bottom: 12px }
-      .intro-img-badge2 { right: 12px; top: 12px }
-    }
-
-    @media(max-width: 480px) {
-      .intro-img { height: 260px }
-      .intro-img-badge, .intro-img-badge2 { position: static; margin-top: 12px; border-radius: 12px }
-      .intro-img-wrap { display: flex; flex-direction: column }
     }
   </style>
 </head>
@@ -2381,96 +2095,52 @@
     <a href="#contact" onclick="closeMob()" style="color:var(--pri-light)">Get Started →</a>
   </div>
 
-
   <!-- ══════════════════════════════════
-     HERO — PURE FULL COVER IMAGE
+     HERO
 ══════════════════════════════════ -->
   <section id="hero" aria-label="Hero">
-    <img
-      class="h-cover-img"
-      src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1920&auto=format&fit=crop&q=90"
-      alt="Graphicmart Digital Creative Agency"
-      loading="eager"
-      fetchpriority="high"
-    />
-    <canvas id="pcanvas" aria-hidden="true" style="display:none"></canvas>
-  </section>
+    <div class="h-bg" aria-hidden="true"></div>
+    <div class="h-grid" aria-hidden="true"></div>
+    <canvas id="pcanvas" aria-hidden="true"></canvas>
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="blob b3" aria-hidden="true"></div>
 
-  <!-- ══════════════════════════════════
-     INTRO — IMAGE + TEXT SPLIT
-  ══════════════════════════════════ -->
-  <section id="intro" aria-label="About intro">
-    <div class="ctr">
-      <div class="intro-grid">
-
-        <!-- LEFT: Image -->
-        <div class="intro-img-wrap rv-l">
-          <img
-            class="intro-img"
-            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&auto=format&fit=crop&q=85"
-            alt="Graphicmart creative team at work"
-            loading="lazy"
-          />
-          <div class="intro-img-corner-br"></div>
-
-          <!-- bottom-left floating badge -->
-          <div class="intro-img-badge">
-            <div class="intro-badge-icon">🏆</div>
-            <div>
-              <div class="intro-badge-text-n">200+ Projects</div>
-              <div class="intro-badge-text-l">Successfully delivered</div>
-            </div>
-          </div>
-
-          <!-- top-right floating badge -->
-          <div class="intro-img-badge2">
-            <div class="intro-live-dot"></div>
-            <span>Active Agency Since 2020</span>
-          </div>
+    <div class="h-content">
+      <div class="h-badge" aria-label="Status">
+        <div class="h-dot" aria-hidden="true"></div>
+        Available for New Projects
+      </div>
+      <h1 class="h-heading">
+        Transform Your<br>
+        <span class="accent-line">Digital Presence</span>
+      </h1>
+      <p class="h-sub">We build modern websites, stunning graphics, and high-converting video content that elevates your
+        brand to the next level.</p>
+      <div class="h-type" aria-live="polite">
+        &gt;&nbsp;<span id="typed"></span><span id="tcur" style="animation:blink 1s infinite">|</span>
+      </div>
+      <div class="h-cta">
+        <a href="#contact" class="btn btn-pri">Get Started →</a>
+        <a href="#portfolio" class="btn btn-out">View Portfolio</a>
+      </div>
+      <div class="h-stats" role="list" aria-label="Agency stats">
+        <div class="h-stat" role="listitem">
+          <div class="h-stat-n">200+</div>
+          <div class="h-stat-l">Projects Done</div>
         </div>
-
-        <!-- RIGHT: Text -->
-        <div class="intro-text rv-r">
-          <div class="s-tag">Who We Are</div>
-
-          <h2 class="intro-title">
-            We Build Brands<br>
-            That <span class="intro-grad">Dominate</span><br>
-            <span class="intro-grad">Digitally</span>
-          </h2>
-
-          <p class="intro-desc">
-            From pixel-perfect websites to scroll-stopping graphics and cinematic video — Graphicmart crafts digital experiences that convert, captivate, and command attention.
-          </p>
-
-          <ul class="intro-list">
-            <li class="intro-list-item">
-              <div class="intro-list-icon">✦</div>
-              <span>Modern, blazing-fast websites built to rank and convert</span>
-            </li>
-            <li class="intro-list-item">
-              <div class="intro-list-icon">✦</div>
-              <span>Brand identities and graphic design that leave a lasting impression</span>
-            </li>
-            <li class="intro-list-item">
-              <div class="intro-list-icon">✦</div>
-              <span>Cinematic video content engineered to stop the scroll</span>
-            </li>
-            <li class="intro-list-item">
-              <div class="intro-list-icon">✦</div>
-              <span>End-to-end SEO and social media strategies that grow your audience</span>
-            </li>
-          </ul>
-
-          <div class="intro-cta">
-            <a href="#contact" class="btn btn-pri">Start Your Project →</a>
-            <div class="intro-rating">
-              <span class="intro-stars">★★★★★</span>
-              <span>5.0 · 98% satisfaction rate</span>
-            </div>
-          </div>
+        <div class="h-stat" role="listitem">
+          <div class="h-stat-n">98%</div>
+          <div class="h-stat-l">Satisfaction</div>
         </div>
-
+        <div class="h-stat" role="listitem">
+          <div class="h-stat-n">5.0★</div>
+          <div class="h-stat-l">Rating</div>
+        </div>
+        <div class="h-stat" role="listitem">
+          <div class="h-stat-n">4yr+</div>
+          <div class="h-stat-l">Experience</div>
+        </div>
       </div>
     </div>
   </section>
@@ -3068,8 +2738,25 @@
       function closeMob() { hbg.classList.remove('open'); mob.classList.remove('open'); hbg.setAttribute('aria-expanded', false) }
       window.closeMob = closeMob;
 
-      /* ─── PARTICLES (disabled — hero is pure image) ─── */
-      // canvas hidden, skip particle animation
+      /* ─── PARTICLES ─── */
+      const cv = document.getElementById('pcanvas'), ctx = cv.getContext('2d');
+      let W, H, pts = [];
+      function resize() { W = cv.width = cv.offsetWidth; H = cv.height = cv.offsetHeight }
+      resize(); window.addEventListener('resize', () => { resize(); init() }, { passive: true });
+      function init() { pts = []; for (let i = 0; i < 70; i++)pts.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + .4, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35, a: Math.random() * .4 + .08, c: Math.random() > .5 ? '220,38,38' : '249,115,22' }) }
+      init();
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        pts.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = W; if (p.x > W) p.x = 0; if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.c},${p.a})`; ctx.fill();
+          pts.forEach(q => { const d = Math.hypot(p.x - q.x, p.y - q.y); if (d < 90) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = `rgba(${p.c},${.05 * (1 - d / 90)})`; ctx.lineWidth = .5; ctx.stroke() } });
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
 
       /* ─── HERO PARALLAX ─── */
       document.addEventListener('mousemove', e => {
@@ -3078,10 +2765,9 @@
       }, { passive: true });
 
       /* ─── TYPING EFFECT ─── */
-      const tel = document.getElementById('typed');
-      if (tel) {
       const words = ['Website Design', 'Graphic Design', 'Video Editing', 'SEO Optimization', 'Landing Pages', 'Social Media Branding'];
       let wi = 0, ci = 0, del = false;
+      const tel = document.getElementById('typed');
       const st = document.createElement('style');
       st.textContent = '@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}';
       document.head.appendChild(st);
@@ -3092,7 +2778,6 @@
         setTimeout(type, del ? 48 : 78);
       }
       type();
-      }
 
       /* ─── SCROLL REVEAL ─── */
       const ro = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target) } }) }, { threshold: .1 });
