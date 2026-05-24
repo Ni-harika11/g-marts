@@ -2964,15 +2964,15 @@
           <div class="cf">
             <form id="cform" novalidate>
               <div class="fg"><label for="fname">Full Name</label><input type="text" id="fname"
-                  placeholder="Your full name" autocomplete="name" />
+                  placeholder="Your full name" autocomplete="name" required aria-required="true" />
                 <div class="ferr" id="ferr-n">Please enter your name.</div>
               </div>
               <div class="fg"><label for="femail">Email Address</label><input type="email" id="femail"
-                  placeholder="you@example.com" autocomplete="email" />
+                  placeholder="you@example.com" autocomplete="email" required aria-required="true" />
                 <div class="ferr" id="ferr-e">Please enter a valid email.</div>
               </div>
               <div class="fg"><label for="fservice">Service Needed</label>
-                <select id="fservice">
+                <select id="fservice" required aria-required="true">
                   <option value="">— Select a service —</option>
                   <option>Website Design</option>
                   <option>Graphic Design</option>
@@ -2981,11 +2981,12 @@
                   <option>Landing Page Design</option>
                   <option>Social Media Branding</option>
                   <option>Multiple Services</option>
+                  <option>Others</option>
                 </select>
                 <div class="ferr" id="ferr-s">Please select a service.</div>
               </div>
               <div class="fg"><label for="fmsg">Your Message</label><textarea id="fmsg"
-                  placeholder="Tell us about your project, goals, and timeline..."></textarea>
+                  placeholder="Tell us about your project, goals, and timeline..." required aria-required="true"></textarea>
                 <div class="ferr" id="ferr-m">Please write a brief message (min 10 characters).</div>
               </div>
               <button type="submit" class="btn btn-pri sub-btn">Send Message →</button>
