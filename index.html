@@ -989,7 +989,8 @@
 
     /* visual panel */
     .about-vis {
-      position: relative
+      position: relative;
+      width: 100%
     }
 
     .vis-wrap {
@@ -997,6 +998,7 @@
       background: linear-gradient(135deg, rgba(220, 38, 38, .12), rgba(249, 115, 22, .07));
       border: 1px solid var(--gborder);
       aspect-ratio: 1;
+      min-height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1011,8 +1013,9 @@
     }
 
     .vis-svg {
-      width: 72%;
-      height: 72%
+      width: 85%;
+      height: 85%;
+      object-fit: contain
     }
 
     .afc {
@@ -1812,7 +1815,14 @@
       }
 
       .about-vis {
-        display: none
+        display: block;
+        margin: 0 auto;
+        max-width: 400px
+      }
+
+      .vis-wrap {
+        aspect-ratio: 1;
+        width: 100%
       }
 
       .con-grid {
@@ -1846,6 +1856,15 @@
 
       section {
         padding: 72px 0
+      }
+
+      .about-vis {
+        max-width: 320px
+      }
+
+      .vis-svg {
+        width: 80% !important;
+        height: 80% !important
       }
 
       .svc-grid {
@@ -1915,6 +1934,33 @@
     @media(max-width:480px) {
       .ctr {
         padding: 0 16px
+      }
+
+      .about-vis {
+        max-width: 280px;
+        margin: 0 auto 32px
+      }
+
+      .vis-wrap {
+        border-radius: 16px
+      }
+
+      .vis-svg {
+        width: 75% !important;
+        height: 75% !important
+      }
+
+      .afc1, .afc2 {
+        padding: 12px 16px;
+        font-size: .9rem
+      }
+
+      .afc-n {
+        font-size: 1.3rem
+      }
+
+      .afc-l {
+        font-size: .65rem
       }
 
       .h-content {
@@ -2271,27 +2317,7 @@
   <!-- ─── LOADER ─── -->
   <div id="loader">
     <div class="ld-logo">
-      <!-- SVG Logo in Loader -->
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="lg1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#a855f7" />
-            <stop offset="1" stop-color="#06b6d4" />
-          </linearGradient>
-          <linearGradient id="lg2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#7c3aed" />
-            <stop offset="1" stop-color="#06b6d4" />
-          </linearGradient>
-        </defs>
-        <rect width="44" height="44" rx="12" fill="url(#lg2)" opacity=".15" />
-        <rect x="1" y="1" width="42" height="42" rx="11" stroke="url(#lg1)" stroke-width="1.2" fill="none" />
-        <!-- Pen nib / diamond shape -->
-        <polygon points="22,6 36,18 22,38 8,18" fill="none" stroke="url(#lg1)" stroke-width="1.6"
-          stroke-linejoin="round" />
-        <polygon points="22,11 31,18 22,33 13,18" fill="url(#lg2)" opacity=".25" />
-        <line x1="8" y1="18" x2="36" y2="18" stroke="url(#lg1)" stroke-width="1.2" />
-        <circle cx="22" cy="18" r="2.5" fill="url(#lg1)" />
-      </svg>
+      <img src="Gmart Logo00.png" alt="Graphicmart" width="44" height="44" style="display:block" />
       <div style="display:flex;flex-direction:column;gap:2px">
         <span
           style="font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#f1f5f9 40%,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px">Graphicmart</span>
@@ -2637,48 +2663,7 @@
           <div class="vis-wrap">
             <div class="vis-bg" aria-hidden="true"></div>
             <!-- Large decorative SVG logo in about section -->
-            <svg class="vis-svg" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg"
-              aria-label="Graphicmart logo illustration">
-              <defs>
-                <linearGradient id="vlg1" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#a855f7" />
-                  <stop offset="1" stop-color="#06b6d4" />
-                </linearGradient>
-                <linearGradient id="vlg2" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#7c3aed" />
-                  <stop offset="1" stop-color="#06b6d4" />
-                </linearGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <!-- outer ring -->
-              <circle cx="80" cy="80" r="76" stroke="url(#vlg1)" stroke-width="1" stroke-dasharray="4 6" opacity=".3" />
-              <circle cx="80" cy="80" r="60" stroke="url(#vlg1)" stroke-width=".8" opacity=".15" />
-              <!-- diamond shape -->
-              <polygon points="80,18 128,66 80,148 32,66" fill="none" stroke="url(#vlg1)" stroke-width="2.2"
-                stroke-linejoin="round" filter="url(#glow)" />
-              <!-- inner fill -->
-              <polygon points="80,24 122,68 80,140 38,68" fill="url(#vlg2)" opacity=".18" />
-              <!-- horizontal line -->
-              <line x1="32" y1="66" x2="128" y2="66" stroke="url(#vlg1)" stroke-width="1.5" />
-              <!-- center diamond -->
-              <polygon points="80,54 94,66 80,80 66,66" fill="url(#vlg1)" opacity=".7" />
-              <!-- sparkles -->
-              <circle cx="80" cy="66" r="5" fill="url(#vlg1)" filter="url(#glow)" />
-              <circle cx="42" cy="38" r="2.5" fill="#a855f7" opacity=".5" />
-              <circle cx="118" cy="110" r="2.5" fill="#06b6d4" opacity=".5" />
-              <circle cx="120" cy="42" r="2" fill="#f59e0b" opacity=".4" />
-              <circle cx="40" cy="108" r="2" fill="#a855f7" opacity=".4" />
-              <!-- small stars -->
-              <text x="74" y="108" font-size="10" fill="url(#vlg1)" opacity=".5" font-family="sans-serif">★</text>
-              <text x="56" y="52" font-size="7" fill="#06b6d4" opacity=".4" font-family="sans-serif">✦</text>
-              <text x="100" y="58" font-size="7" fill="#a855f7" opacity=".4" font-family="sans-serif">✦</text>
-            </svg>
+            <img class="vis-svg" src="Gmart Logo00.png" alt="Graphicmart logo illustration" />
           </div>
           <div class="afc afc1">
             <div class="afc-n">600+</div>
