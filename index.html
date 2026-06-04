@@ -533,9 +533,101 @@
     /* ══════════════════════════════════
        HERO — PURE FULL COVER IMAGE
     ══════════════════════════════════ */
+    #hero {
+      width: 100%;
+      height: 55vh;
+      max-height: 640px;
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
 
-    @media(max-width: 600px) {
-      #hero { height: 70vh }
+    .h-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      transition: opacity .45s ease;
+    }
+
+    .hero-slider {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .hero-slider-controls {
+      position: absolute;
+      bottom: 20px;
+      right: 24px;
+      display: flex;
+      gap: 12px;
+      z-index: 2;
+    }
+
+    .hero-slider-controls button {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .24);
+      background: rgba(15, 8, 8, .72);
+      color: #fff;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .25s, transform .25s;
+      pointer-events: auto;
+    }
+
+    .hero-slider-controls button:hover {
+      background: rgba(255, 255, 255, .16);
+      transform: scale(1.05);
+    }
+
+    .hero-slider-dots {
+      position: absolute;
+      bottom: 18px;
+      left: 24px;
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .hero-slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .35);
+      cursor: pointer;
+      transition: background .25s, transform .25s;
+    }
+
+    .hero-slider-dot.active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+
+    @media(max-width: 1200px) {
+      #hero { height: 52vh; max-height: 560px }
+    }
+
+    @media(max-width: 900px) {
+      #hero { height: 48vh; max-height: 480px }
+    }
+
+    @media(max-width: 680px) {
+      #hero { height: 42vh; max-height: 420px }
+    }
+
+    @media(max-width: 520px) {
+      #hero { height: 38vh; max-height: 360px; min-height: 280px }
     }
 
     .h-grid {
@@ -2212,11 +2304,25 @@
     }
 
     /* CTA row */
+    .intro-note {
+      margin: 18px 0 24px;
+      color: var(--white);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 560px;
+      opacity: .92;
+    }
+
     .intro-cta {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      align-items: center
+      gap: 16px;
+      align-items: center;
+    }
+
+    .intro-cta .btn-pri {
+      padding: 16px 36px;
+      font-size: 1rem;
     }
 
     .intro-rating {
@@ -2225,6 +2331,18 @@
       gap: 8px;
       font-size: .8rem;
       color: var(--gray)
+    }
+
+    @media(max-width: 680px) {
+      .intro-cta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .intro-cta .btn-pri {
+        width: 100%;
+        justify-content: center;
+      }
     }
 
     .intro-stars {
@@ -2375,13 +2493,21 @@
      HERO — PURE FULL COVER IMAGE
 ══════════════════════════════════ -->
   <section id="hero" aria-label="Hero">
-    <img
-      class="h-cover-img"
-      src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1920&auto=format&fit=crop&q=90"
-      alt="Graphicmart Digital Creative Agency"
-      loading="eager"
-      fetchpriority="high"
-    />
+    <div class="hero-slider">
+      <img
+        id="heroImg"
+        class="h-cover-img"
+        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&auto=format&fit=crop&q=90"
+        alt="Graphicmart Digital Creative Agency"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero-slider-controls">
+        <button id="heroPrev" type="button" aria-label="Previous slide">←</button>
+        <button id="heroNext" type="button" aria-label="Next slide">→</button>
+      </div>
+      <div class="hero-slider-dots" id="heroDots" aria-label="Slide navigation"></div>
+    </div>
     <canvas id="pcanvas" aria-hidden="true" style="display:none"></canvas>
   </section>
 
@@ -2450,6 +2576,8 @@
               <span>End-to-end SEO and social media strategies that grow your audience</span>
             </li>
           </ul>
+
+          <div class="intro-note">Ready to launch your brand with a bold website, sharp visuals, and a conversion-first strategy.</div>
 
           <div class="intro-cta">
             <a href="#contact" class="btn btn-pri">Start Your Project →</a>
@@ -3062,6 +3190,71 @@
         const dx = (e.clientX / innerWidth - .5) * 18, dy = (e.clientY / innerHeight - .5) * 18;
         document.querySelectorAll('.blob').forEach((b, i) => { b.style.transform = `translate(${dx * (i + 1) * .45}px,${dy * (i + 1) * .45}px)` });
       }, { passive: true });
+
+      /* ─── HERO SLIDER ─── */
+      const heroImages = [
+        'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=1920&auto=format&fit=crop&q=90'
+      ];
+      const heroImg = document.getElementById('heroImg');
+      const heroDots = document.getElementById('heroDots');
+      const heroPrev = document.getElementById('heroPrev');
+      const heroNext = document.getElementById('heroNext');
+      let heroIndex = 0;
+      let heroTimer;
+
+      function updateHeroSlide() {
+        heroImg.style.opacity = '0';
+        setTimeout(() => {
+          heroImg.src = heroImages[heroIndex];
+          heroImg.alt = `Graphicmart slide ${heroIndex + 1}`;
+          heroImg.style.opacity = '1';
+        }, 120);
+        heroDots.querySelectorAll('.hero-slider-dot').forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === heroIndex);
+        });
+      }
+
+      function renderHeroDots() {
+        heroDots.innerHTML = '';
+        heroImages.forEach((_, idx) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'hero-slider-dot' + (idx === heroIndex ? ' active' : '');
+          dot.addEventListener('click', () => {
+            heroIndex = idx;
+            updateHeroSlide();
+            resetHeroTimer();
+          });
+          heroDots.appendChild(dot);
+        });
+      }
+
+      function nextHeroSlide() {
+        heroIndex = (heroIndex + 1) % heroImages.length;
+        updateHeroSlide();
+      }
+
+      function prevHeroSlide() {
+        heroIndex = (heroIndex - 1 + heroImages.length) % heroImages.length;
+        updateHeroSlide();
+      }
+
+      function resetHeroTimer() {
+        clearInterval(heroTimer);
+        heroTimer = setInterval(nextHeroSlide, 5000);
+      }
+
+      heroPrev.addEventListener('click', () => { prevHeroSlide(); resetHeroTimer(); });
+      heroNext.addEventListener('click', () => { nextHeroSlide(); resetHeroTimer(); });
+      document.querySelector('.hero-slider').addEventListener('mouseenter', () => clearInterval(heroTimer));
+      document.querySelector('.hero-slider').addEventListener('mouseleave', resetHeroTimer);
+      renderHeroDots();
+      resetHeroTimer();
 
       /* ─── TYPING EFFECT ─── */
       const tel = document.getElementById('typed');
