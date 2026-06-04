@@ -19,8 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet" />
   <style>
     /* ══════════════════════════════════
@@ -534,24 +533,6 @@
     /* ══════════════════════════════════
        HERO — PURE FULL COVER IMAGE
     ══════════════════════════════════ */
-    #hero {
-      width: 100%;
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-      padding: 0;
-      display: block
-    }
-
-    .h-cover-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-      position: relative;
-      z-index: 0
-    }
 
     @media(max-width: 600px) {
       #hero { height: 70vh }
@@ -1295,20 +1276,18 @@
     }
 
     .tm-wrap {
-      overflow: hidden;
       position: relative
     }
 
     .tm-track {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 22px;
-      transition: transform .5s var(--ease);
-      will-change: transform
+      transform: none;
     }
 
     .tm-card {
-      min-width: 370px;
-      flex-shrink: 0;
+      width: 100%;
       background: var(--glass);
       border: 1px solid var(--gborder);
       border-radius: var(--r);
@@ -2275,45 +2254,45 @@
   </style>
 </head>
 
-<body>
+ <body>
 
   <!-- ─── TOP ANNOUNCEMENT BANNER ─── -->
-<div id="top-banner" style="
-  background: linear-gradient(90deg, #991b1b, #dc2626, #f97316);
-  color: #fff;
-  text-align: center;
-  padding: 10px 20px;
-  font-size: .82rem;
-  font-weight: 600;
-  letter-spacing: .4px;
-  position: relative;
-  z-index: 99996;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-">
-  🔥 <span>Limited Time Offer — Get <strong>20% OFF</strong> your first project!</span>
-  <a href="#contact" style="
-    background: #fff;
-    color: #dc2626;
-    padding: 4px 14px;
-    border-radius: 99px;
-    font-size: .75rem;
-    font-weight: 700;
-    text-decoration: none;
-  ">Claim Now →</a>
-  <button onclick="document.getElementById('top-banner').style.display='none'" style="
-    position: absolute;
-    right: 16px;
-    background: none;
-    border: none;
+  <div id="top-banner" style="
+    background: linear-gradient(90deg, #991b1b, #dc2626, #f97316);
     color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    opacity: .8;
-  ">✕</button>
-</div>
+    text-align: center;
+    padding: 10px 20px;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .4px;
+    position: relative;
+    z-index: 99996;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  ">
+    🔥 <span>Limited Time Offer — Get <strong>20% OFF</strong> your first project!</span>
+    <a href="#contact" style="
+      background: #fff;
+      color: #dc2626;
+      padding: 4px 14px;
+      border-radius: 99px;
+      font-size: .75rem;
+      font-weight: 700;
+      text-decoration: none;
+    ">Claim Now →</a>
+    <button onclick="document.getElementById('top-banner').style.display='none'" style="
+      position: absolute;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: .8;
+    ">✕</button>
+  </div>
   <!-- ─── LOADER ─── -->
   <div id="loader">
     <div class="ld-logo">
@@ -2353,7 +2332,7 @@
   <button id="totop" onclick="scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
   <!-- ══════════════════════════════════
      NAVBAR
-══════════════════════════════════ -->
+  ══════════════════════════════════ -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-wrap">
 
@@ -2507,150 +2486,150 @@
   <!-- ══════════════════════════════════
      SERVICES
 ══════════════════════════════════ -->
-<section id="services" aria-label="Services">
-  <div class="ctr">
-    <div class="svc-head rv">
-      <div class="s-tag">What We Do</div>
-      <h2 class="s-title">Services Built for <span class="grad">Growth</span></h2>
-      <p class="s-sub">
-        Powerful digital solutions crafted to elevate your brand, grow your audience,
-        and turn visitors into loyal customers.
-      </p>
+  <section id="services" aria-label="Services">
+    <div class="ctr">
+      <div class="svc-head rv">
+        <div class="s-tag">What We Do</div>
+        <h2 class="s-title">Services Built for <span class="grad">Growth</span></h2>
+        <p class="s-sub">
+          Powerful digital solutions crafted to elevate your brand, grow your audience,
+          and turn visitors into loyal customers.
+        </p>
+      </div>
+
+      <div class="svc-grid">
+
+        <!-- Graphic Design -->
+        <div class="svc-card rv" style="transition-delay:.04s">
+          <div class="svc-n">01</div>
+          <div class="svc-icon">🎨</div>
+          <div class="svc-title">Graphic Design</div>
+          <div class="svc-desc">
+            Creative branding, social media creatives, posters, banners, logos,
+            and marketing materials designed to make your brand stand out.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
+        </div>
+
+        <!-- Print On Demand -->
+        <div class="svc-card rv" style="transition-delay:.08s">
+          <div class="svc-n">02</div>
+          <div class="svc-icon">🛍️</div>
+          <div class="svc-title">Print On Demand</div>
+          <div class="svc-desc">
+            Custom t-shirts, hoodies, mugs, posters, and merchandise solutions
+            with modern designs built for online selling and branding.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
+        </div>
+
+        <!-- Digital Marketing -->
+        <div class="svc-card rv" style="transition-delay:.12s">
+          <div class="svc-n">03</div>
+          <div class="svc-icon">🚀</div>
+          <div class="svc-title">Digital Marketing</div>
+          <div class="svc-desc">
+            SEO, social media campaigns, paid ads, and growth strategies that
+            increase visibility, traffic, and conversions.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
+        </div>
+
+        <!-- Video Editing -->
+        <div class="svc-card rv" style="transition-delay:.16s">
+          <div class="svc-n">04</div>
+          <div class="svc-icon">🎬</div>
+          <div class="svc-title">Video Editing</div>
+          <div class="svc-desc">
+            Branded reels, promo videos, and motion content edited for engagement,
+            storytelling, and higher conversion performance.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
+        </div>
+
+        <!-- Web & App Development -->
+        <div class="svc-card rv" style="transition-delay:.20s">
+          <div class="svc-n">05</div>
+          <div class="svc-icon">🌐</div>
+          <div class="svc-title">Web & App Development</div>
+          <div class="svc-desc">
+            Fast, responsive websites and scalable applications built for smooth
+            performance, strong UX, and measurable growth.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
+        </div>
+
+        <!-- UI/UX Design -->
+        <div class="svc-card rv" style="transition-delay:.24s">
+          <div class="svc-n">06</div>
+          <div class="svc-icon">🖌️</div>
+          <div class="svc-title">UI/UX Design</div>
+          <div class="svc-desc">
+            User-focused interfaces and seamless digital experiences crafted to
+            improve engagement, usability, and customer satisfaction.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Process -->
+      <div class="process rv">
+        <div style="text-align:center;margin-bottom:16px">
+          <div class="s-tag">How We Work</div>
+          <h2 class="s-title">Our <span class="grad">Process</span></h2>
+        </div>
+
+        <div class="process-steps">
+
+          <div class="p-step">
+            <div class="p-circle">01</div>
+            <div class="p-title">Research</div>
+            <div class="p-desc">
+              We understand your business goals, audience, and market strategy.
+            </div>
+          </div>
+
+          <div class="p-step">
+            <div class="p-circle">02</div>
+            <div class="p-title">Planning</div>
+            <div class="p-desc">
+              Creating a structured roadmap with design, marketing, and development goals.
+            </div>
+          </div>
+
+          <div class="p-step">
+            <div class="p-circle">03</div>
+            <div class="p-title">Execution</div>
+            <div class="p-desc">
+              Our team designs, develops, and optimizes every detail with precision.
+            </div>
+          </div>
+
+          <div class="p-step">
+            <div class="p-circle">04</div>
+            <div class="p-title">Launch & Growth</div>
+            <div class="p-desc">
+              We launch your project successfully and help scale your digital presence.
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
-
-    <div class="svc-grid">
-
-      <!-- Graphic Design -->
-      <div class="svc-card rv" style="transition-delay:.04s">
-        <div class="svc-n">01</div>
-        <div class="svc-icon">🎨</div>
-        <div class="svc-title">Graphic Design</div>
-        <div class="svc-desc">
-          Creative branding, social media creatives, posters, banners, logos,
-          and marketing materials designed to make your brand stand out.
-        </div>
-        <a href="#contact" class="svc-arrow">
-          Learn more <span>→</span>
-        </a>
-      </div>
-
-      <!-- Print On Demand -->
-      <div class="svc-card rv" style="transition-delay:.08s">
-        <div class="svc-n">02</div>
-        <div class="svc-icon">🛍️</div>
-        <div class="svc-title">Print On Demand</div>
-        <div class="svc-desc">
-          Custom t-shirts, hoodies, mugs, posters, and merchandise solutions
-          with modern designs built for online selling and branding.
-        </div>
-        <a href="#contact" class="svc-arrow">
-          Learn more <span>→</span>
-        </a>
-      </div>
-
-      <!-- Digital Marketing -->
-      <div class="svc-card rv" style="transition-delay:.12s">
-        <div class="svc-n">03</div>
-        <div class="svc-icon">🚀</div>
-        <div class="svc-title">Digital Marketing</div>
-        <div class="svc-desc">
-          SEO, social media campaigns, paid ads, and growth strategies that
-          increase visibility, traffic, and conversions.
-        </div>
-        <a href="#contact" class="svc-arrow">
-          Learn more <span>→</span>
-        </a>
-      </div>
-
-      <!-- Video Editing -->
-      <div class="svc-card rv" style="transition-delay:.16s">
-        <div class="svc-n">04</div>
-        <div class="svc-icon">🎬</div>
-        <div class="svc-title">Video Editing</div>
-        <div class="svc-desc">
-          Branded reels, promo videos, and motion content edited for engagement,
-          storytelling, and higher conversion performance.
-        </div>
-        <a href="#contact" class="svc-arrow">
-          Learn more <span>→</span>
-        </a>
-      </div>
-
-      <!-- Web & App Development -->
-      <div class="svc-card rv" style="transition-delay:.20s">
-        <div class="svc-n">05</div>
-        <div class="svc-icon">🌐</div>
-        <div class="svc-title">Web & App Development</div>
-        <div class="svc-desc">
-          Fast, responsive websites and scalable applications built for smooth
-          performance, strong UX, and measurable growth.
-        </div>
-        <a href="#contact" class="svc-arrow">
-          Learn more <span>→</span>
-        </a>
-      </div>
-
-      <!-- UI/UX Design -->
-      <div class="svc-card rv" style="transition-delay:.24s">
-        <div class="svc-n">06</div>
-        <div class="svc-icon">🖌️</div>
-        <div class="svc-title">UI/UX Design</div>
-        <div class="svc-desc">
-          User-focused interfaces and seamless digital experiences crafted to
-          improve engagement, usability, and customer satisfaction.
-        </div>
-        <a href="#contact" class="svc-arrow">
-          Learn more <span>→</span>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Process -->
-    <div class="process rv">
-      <div style="text-align:center;margin-bottom:16px">
-        <div class="s-tag">How We Work</div>
-        <h2 class="s-title">Our <span class="grad">Process</span></h2>
-      </div>
-
-      <div class="process-steps">
-
-        <div class="p-step">
-          <div class="p-circle">01</div>
-          <div class="p-title">Research</div>
-          <div class="p-desc">
-            We understand your business goals, audience, and market strategy.
-          </div>
-        </div>
-
-        <div class="p-step">
-          <div class="p-circle">02</div>
-          <div class="p-title">Planning</div>
-          <div class="p-desc">
-            Creating a structured roadmap with design, marketing, and development goals.
-          </div>
-        </div>
-
-        <div class="p-step">
-          <div class="p-circle">03</div>
-          <div class="p-title">Execution</div>
-          <div class="p-desc">
-            Our team designs, develops, and optimizes every detail with precision.
-          </div>
-        </div>
-
-        <div class="p-step">
-          <div class="p-circle">04</div>
-          <div class="p-title">Launch & Growth</div>
-          <div class="p-desc">
-            We launch your project successfully and help scale your digital presence.
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- ══════════════════════════════════
      ABOUT
@@ -2888,11 +2867,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="tm-ctrl">
-        <button class="tmbtn" id="tmprev" aria-label="Previous testimonial">←</button>
-        <div class="tm-dots" id="tmdots"></div>
-        <button class="tmbtn" id="tmnext" aria-label="Next testimonial">→</button>
       </div>
     </div>
   </section>
@@ -3139,24 +3113,7 @@
         });
       });
 
-      /* ─── TESTIMONIALS ─── */
-      const track = document.getElementById('tmtrack'), cards = [...track.querySelectorAll('.tm-card')];
-      const dotsW = document.getElementById('tmdots');
-      let ti = 0, ta;
-      cards.forEach((_, i) => { const d = document.createElement('div'); d.className = 'tmd' + (i === 0 ? ' on' : ''); d.addEventListener('click', () => goTo(i)); dotsW.appendChild(d) });
-      function goTo(i) {
-        ti = i;
-        const cw = cards[0].offsetWidth + 22;
-        const maxS = (cards.length - 1) * cw;
-        track.style.transform = `translateX(-${Math.min(ti * cw, maxS)}px)`;
-        document.querySelectorAll('.tmd').forEach((d, j) => d.classList.toggle('on', j === ti));
-      }
-      document.getElementById('tmprev').addEventListener('click', () => goTo((ti - 1 + cards.length) % cards.length));
-      document.getElementById('tmnext').addEventListener('click', () => goTo((ti + 1) % cards.length));
-      ta = setInterval(() => goTo((ti + 1) % cards.length), 4200);
-      track.addEventListener('mouseenter', () => clearInterval(ta));
-      track.addEventListener('mouseleave', () => { ta = setInterval(() => goTo((ti + 1) % cards.length), 4200) });
-      window.addEventListener('resize', () => goTo(ti));
+      /* Testimonials are now rendered as static cards; carousel behavior has been removed. */
 
       /* ─── CONTACT FORM ─── */
       const submitContactForm = async (submission) => {
@@ -3213,6 +3170,6 @@
       });
     })();
   </script>
-</body>
+  </body>
 
 </html>
