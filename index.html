@@ -58,12 +58,13 @@
       background: var(--bg);
       color: var(--white);
       overflow-x: hidden;
-      cursor: none
+      cursor: none;
     }
 
     a {
       text-decoration: none;
-      color: inherit
+      color: inherit;
+      cursor: pointer;
     }
 
     ul {
@@ -72,7 +73,7 @@
 
     button {
       font-family: 'Poppins', sans-serif;
-      cursor: none
+      cursor: pointer;
     }
 
     img {
@@ -207,10 +208,20 @@
       font-size: 1.22rem;
       font-weight: 800;
       letter-spacing: -.5px;
-      background: linear-gradient(135deg, var(--white) 40%, var(--secondary));
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .gs-logo-name-text {
+      color: var(--white);
+    }
+
+    .gs-logo-name-accent {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text
+      background-clip: text;
     }
 
     .gs-logo-tag {
@@ -232,7 +243,14 @@
       right: 0;
       z-index: 1000;
       padding: 18px 0;
-      transition: all .35s var(--ease)
+      transition: all .35s var(--ease);
+    }
+
+    /* hide the fixed navbar while top announcement banner is visible */
+    #nav.nav-hidden {
+      transform: translateY(-140%);
+      pointer-events: none;
+      opacity: 0;
     }
 
     #nav.scrolled {
@@ -242,6 +260,72 @@
       -webkit-backdrop-filter: blur(22px);
       border-bottom: 1px solid var(--gborder);
       box-shadow: 0 4px 40px rgba(0, 0, 0, .4)
+    }
+
+    #top-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99996;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 84px 12px 16px;
+      min-height: 56px;
+      text-align: center;
+    }
+
+    #top-banner span {
+      min-width: 0;
+      flex: 1 1 auto;
+      white-space: normal;
+    }
+
+    #top-banner a {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      margin-left: 6px;
+    }
+
+    #top-banner-close {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #000;
+      border: none;
+      opacity: .98;
+      cursor: pointer;
+      z-index: 99999;
+    }
+
+    @media(max-width:720px) {
+      #top-banner {
+        padding: 12px 58px 12px 14px;
+        gap: 8px;
+      }
+
+      #top-banner-close {
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        font-size: .95rem;
+      }
+
+      #top-banner a {
+        padding: 8px 14px;
+        font-size: .72rem;
+      }
     }
 
     .nav-wrap {
@@ -349,15 +433,17 @@
       inset: 0;
       background: rgba(15, 8, 8, .97);
       backdrop-filter: blur(20px);
-      z-index: 999;
+      z-index: 99999;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 28px
+      justify-content: flex-start;
+      padding-top: 120px;
+      gap: 18px;
     }
 
     #mob.open {
-      display: flex
+      display: flex;
+      z-index: 99999;
     }
 
     #mob a {
@@ -417,6 +503,11 @@
     section {
       padding: 100px 0;
       position: relative
+    }
+
+    #hero {
+      padding: 0;
+      margin-top: 0;
     }
 
     .ctr {
@@ -1826,7 +1917,7 @@
       font-size: 1.5rem;
       box-shadow: 0 6px 22px rgba(37, 211, 102, .4);
       transition: all .3s;
-      cursor: none
+      cursor: pointer;
     }
 
     #wa:hover {
@@ -1853,7 +1944,7 @@
       opacity: 0;
       transform: translateY(8px);
       transition: all .3s;
-      cursor: none
+      cursor: pointer;
     }
 
     #totop.show {
@@ -2000,6 +2091,17 @@
       .fnl {
         flex-direction: column
       }
+      /* mobile floating button tweaks */
+      #wa {
+        right: 16px;
+        bottom: 16px;
+      }
+
+      #totop {
+        right: 74px;
+        left: auto;
+        bottom: 16px;
+      }
     }
 
     @media(max-width:480px) {
@@ -2058,6 +2160,26 @@
         flex-direction: column
       }
 
+      /* tweak floating buttons on very small screens */
+      #wa {
+        right: 16px;
+        bottom: 16px;
+        width: 48px;
+        height: 48px;
+      }
+
+      #totop {
+        right: 16px;
+        left: auto;
+        bottom: 76px;
+        width: 44px;
+        height: 44px;
+      }
+
+    }
+
+
+    /* merged mobile tweaks: moved into the existing 768px block above */
       .h-stat {
         min-width: calc(50% - 5px)
       }
@@ -2094,7 +2216,6 @@
         height: 38px;
         font-size: .9rem
       }
-    }
     /* ══════════════════════════════════
        INTRO SPLIT SECTION
     ══════════════════════════════════ */
@@ -2378,46 +2499,63 @@
   <div id="top-banner" style="
     background: linear-gradient(90deg, #991b1b, #dc2626, #f97316);
     color: #fff;
-    text-align: center;
-    padding: 10px 20px;
     font-size: .82rem;
     font-weight: 600;
     letter-spacing: .4px;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 99996;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 84px 12px 16px;
+    min-height: 56px;
+    text-align: center;
   ">
-    🔥 <span>Limited Time Offer — Get <strong>20% OFF</strong> your first project!</span>
+    <i class="fa-solid fa-fire" aria-hidden="true" style="color:#fff;font-size:1rem"></i>
+    <span>Limited Time Offer — Get <strong>20% OFF</strong> your first project!</span>
     <a href="#contact" style="
       background: #fff;
       color: #dc2626;
-      padding: 4px 14px;
+      padding: 8px 14px;
       border-radius: 99px;
       font-size: .75rem;
       font-weight: 700;
       text-decoration: none;
     ">Claim Now →</a>
-    <button onclick="document.getElementById('top-banner').style.display='none'" style="
+    <button id="top-banner-close" aria-label="Close announcement" onclick="document.getElementById('top-banner').style.display='none'" style="
       position: absolute;
-      right: 16px;
-      background: none;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
       border: none;
-      color: #fff;
+      color: #000;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1rem;
       cursor: pointer;
-      opacity: .8;
-    ">✕</button>
+      opacity: .98;
+      z-index: 99999;
+    "><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
   </div>
   <!-- ─── LOADER ─── -->
   <div id="loader">
     <div class="ld-logo">
       <img src="Gmart Logo00.png" alt="Graphicmart" width="44" height="44" style="display:block" />
       <div style="display:flex;flex-direction:column;gap:2px">
-        <span
-          style="font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#f1f5f9 40%,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px">Graphicmart</span>
+        <span style="font-size:1.5rem;font-weight:900;letter-spacing:-.5px;display:inline-flex;gap:0">
+          <span style="color:#fff">Graphic</span>
+          <span style="background:linear-gradient(135deg,#dc2626,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">mart</span>
+        </span>
         <span
           style="font-size:.52rem;letter-spacing:2.5px;text-transform:uppercase;color:#8897b3;font-weight:600">
           Creative Agency</span>
@@ -2436,7 +2574,7 @@
   <!-- ─── SUCCESS POPUP ─── -->
   <div id="popup">
     <div class="pop">
-      <div class="pop-ico">🎉</div>
+      <div class="pop-ico"><i class="fa-solid fa-circle-check" aria-hidden="true"></i></div>
       <div class="pop-t">Message Sent!</div>
       <div class="pop-s">We'll reply within 24 hours. Looking forward to working with you!</div>
       <button class="btn btn-pri" onclick="document.getElementById('popup').classList.remove('show')">Close</button>
@@ -2445,9 +2583,9 @@
 
   <!-- ─── FLOATING BTNS ─── -->
   <!-- ─── FLOATING BTNS ─── -->
-  <a id="wa" href="https://wa.me/917667189326" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+  <a id="wa" href="https://wa.me/917667189326" target="_blank" rel="noopener" title="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
 
-  <button id="totop" onclick="scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+  <button id="totop" type="button" aria-label="Back to top" title="Back to top">↑</button>
   <!-- ══════════════════════════════════
      NAVBAR
   ══════════════════════════════════ -->
@@ -2458,7 +2596,7 @@
       <a href="#" class="gs-logo" aria-label="Graphicmart Home">
         <img class="gs-logo-mark" src="Gmart Logo00.png" alt="Graphicmart logo" width="38" height="38" />
         <div class="gs-logo-text">
-          <span class="gs-logo-name">Graphicmart</span>
+          <span class="gs-logo-name"><span class="gs-logo-name-text">Graphic</span><span class="gs-logo-name-accent">mart</span></span>
           <span class="gs-logo-tag">Creative Agency</span>
         </div>
       </a>
@@ -2479,7 +2617,7 @@
 
   <!-- MOBILE MENU -->
   <div id="mob" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-    <button id="mob-close" aria-label="Close menu">✕</button>
+    <button id="mob-close" aria-label="Close menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     <a href="#hero" onclick="closeMob()">Home</a>
     <a href="#services" onclick="closeMob()">Services</a>
     <a href="#about" onclick="closeMob()">About Us</a>
@@ -2503,8 +2641,8 @@
         fetchpriority="high"
       />
       <div class="hero-slider-controls">
-        <button id="heroPrev" type="button" aria-label="Previous slide">←</button>
-        <button id="heroNext" type="button" aria-label="Next slide">→</button>
+        <button id="heroPrev" type="button" aria-label="Previous slide"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+        <button id="heroNext" type="button" aria-label="Next slide"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
       </div>
       <div class="hero-slider-dots" id="heroDots" aria-label="Slide navigation"></div>
     </div>
@@ -2530,7 +2668,7 @@
 
           <!-- bottom-left floating badge -->
           <div class="intro-img-badge">
-            <div class="intro-badge-icon">🏆</div>
+            <div class="intro-badge-icon"><i class="fa-solid fa-trophy" aria-hidden="true"></i></div>
             <div>
               <div class="intro-badge-text-n">600+ Projects</div>
               <div class="intro-badge-text-l">Successfully delivered</div>
@@ -2560,19 +2698,19 @@
 
           <ul class="intro-list">
             <li class="intro-list-item">
-              <div class="intro-list-icon">✦</div>
+              <div class="intro-list-icon"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
               <span>Modern, blazing-fast websites built to rank and convert</span>
             </li>
             <li class="intro-list-item">
-              <div class="intro-list-icon">✦</div>
+              <div class="intro-list-icon"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
               <span>Brand identities and graphic design that leave a lasting impression</span>
             </li>
             <li class="intro-list-item">
-              <div class="intro-list-icon">✦</div>
+              <div class="intro-list-icon"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
               <span>Cinematic video content engineered to stop the scroll</span>
             </li>
             <li class="intro-list-item">
-              <div class="intro-list-icon">✦</div>
+              <div class="intro-list-icon"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
               <span>End-to-end SEO and social media strategies that grow your audience</span>
             </li>
           </ul>
@@ -2630,7 +2768,7 @@
         <!-- Graphic Design -->
         <div class="svc-card rv" style="transition-delay:.04s">
           <div class="svc-n">01</div>
-          <div class="svc-icon">🎨</div>
+          <div class="svc-icon"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
           <div class="svc-title">Graphic Design</div>
           <div class="svc-desc">
             Creative branding, social media creatives, posters, banners, logos,
@@ -2644,7 +2782,7 @@
         <!-- Print On Demand -->
         <div class="svc-card rv" style="transition-delay:.08s">
           <div class="svc-n">02</div>
-          <div class="svc-icon">🛍️</div>
+          <div class="svc-icon"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i></div>
           <div class="svc-title">Print On Demand</div>
           <div class="svc-desc">
             Custom t-shirts, hoodies, mugs, posters, and merchandise solutions
@@ -2658,7 +2796,7 @@
         <!-- Digital Marketing -->
         <div class="svc-card rv" style="transition-delay:.12s">
           <div class="svc-n">03</div>
-          <div class="svc-icon">🚀</div>
+          <div class="svc-icon"><i class="fa-solid fa-rocket" aria-hidden="true"></i></div>
           <div class="svc-title">Digital Marketing</div>
           <div class="svc-desc">
             SEO, social media campaigns, paid ads, and growth strategies that
@@ -2672,7 +2810,7 @@
         <!-- Video Editing -->
         <div class="svc-card rv" style="transition-delay:.16s">
           <div class="svc-n">04</div>
-          <div class="svc-icon">🎬</div>
+          <div class="svc-icon"><i class="fa-solid fa-film" aria-hidden="true"></i></div>
           <div class="svc-title">Video Editing</div>
           <div class="svc-desc">
             Branded reels, promo videos, and motion content edited for engagement,
@@ -2686,7 +2824,7 @@
         <!-- Web & App Development -->
         <div class="svc-card rv" style="transition-delay:.20s">
           <div class="svc-n">05</div>
-          <div class="svc-icon">🌐</div>
+          <div class="svc-icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></div>
           <div class="svc-title">Web & App Development</div>
           <div class="svc-desc">
             Fast, responsive websites and scalable applications built for smooth
@@ -2700,7 +2838,7 @@
         <!-- UI/UX Design -->
         <div class="svc-card rv" style="transition-delay:.24s">
           <div class="svc-n">06</div>
-          <div class="svc-icon">🖌️</div>
+          <div class="svc-icon"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></div>
           <div class="svc-title">UI/UX Design</div>
           <div class="svc-desc">
             User-focused interfaces and seamless digital experiences crafted to
@@ -2865,7 +3003,7 @@
       </div>
       <div class="pgrid" id="pgrid">
         <div class="pc rv" data-c="graphic" style="transition-delay:.08s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#4c1d95,#6d28d9)">🎨</div>
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#4c1d95,#6d28d9)"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
@@ -2876,7 +3014,7 @@
           </div>
         </div>
         <div class="pc rv" data-c="print" style="transition-delay:.04s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#1e1b4b,#312e81)">🛒</div>
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#1e1b4b,#312e81)"><i class="fa-solid fa-box-open" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
@@ -2887,7 +3025,7 @@
           </div>
         </div>
         <div class="pc rv" data-c="video" style="transition-delay:.12s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#164e63,#0e7490)">🎬</div>
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#164e63,#0e7490)"><i class="fa-solid fa-film" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
@@ -2898,7 +3036,7 @@
           </div>
         </div>
         <div class="pc rv" data-c="marketing" style="transition-delay:.16s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#78350f,#b45309)">📈</div>
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#78350f,#b45309)"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
@@ -2909,7 +3047,7 @@
           </div>
         </div>
         <div class="pc rv" data-c="webapp" style="transition-delay:.2s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#134e4a,#0f766e)">🌐</div>
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#134e4a,#0f766e)"><i class="fa-solid fa-globe" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
@@ -2920,7 +3058,7 @@
           </div>
         </div>
         <div class="pc rv" data-c="uiux" style="transition-delay:.24s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8)">🧭</div>
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8)"><i class="fa-solid fa-compass-drafting" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
@@ -3174,6 +3312,44 @@
         navAs.forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + cur));
       };
       window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Keep navbar visible but offset it below the fixed top-banner so nothing is hidden.
+      const topBanner = document.getElementById('top-banner');
+      const topBannerClose = document.getElementById('top-banner-close');
+      const heroSection = document.getElementById('hero');
+      function updateNavOffset() {
+        if (!nav) return;
+        const bannerHeight = topBanner && getComputedStyle(topBanner).display !== 'none' ? topBanner.offsetHeight : 0;
+        const navHeight = nav.offsetHeight || 0;
+        nav.style.top = bannerHeight + 'px';
+        if (heroSection) {
+          heroSection.style.marginTop = bannerHeight + navHeight + 'px';
+        }
+      }
+      // set initial offset and update on resize for responsive mobile heights
+      updateNavOffset();
+      window.addEventListener('resize', updateNavOffset, { passive: true });
+      // when banner is closed, reset nav and content offset
+      if (topBannerClose) topBannerClose.addEventListener('click', () => {
+        if (topBanner) topBanner.style.display = 'none';
+        updateNavOffset();
+      });
+      // if user scrolls past the banner height, pin nav to top
+      window.addEventListener('scroll', () => {
+        if (!topBanner) return;
+        if (window.scrollY > (topBanner.offsetHeight || 0)) {
+          nav.style.top = '0';
+          if (heroSection) {
+            heroSection.style.marginTop = nav.offsetHeight + 'px';
+          }
+        } else {
+          updateNavOffset();
+        }
+      }, { passive: true });
+
+      // Ensure the Back-to-top button reliably scrolls the page to top
+      const totopBtn = document.getElementById('totop');
+      if (totopBtn) totopBtn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
       /* ─── HAMBURGER ─── */
       const hbg = document.getElementById('hbg'), mob = document.getElementById('mob');
