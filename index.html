@@ -1081,60 +1081,98 @@
 
     /* process */
     .process {
-      margin-top: 90px
+      margin-top: 120px;
     }
 
     .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
       position: relative;
-      margin-top: 48px
+      margin-top: 48px;
+      padding: 0 24px;
     }
 
     .process-steps::before {
       content: '';
       position: absolute;
-      top: 27px;
-      left: 12.5%;
-      right: 12.5%;
+      top: 50px;
+      left: 24px;
+      right: 24px;
       height: 1px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      opacity: .3
+      background: linear-gradient(90deg, rgba(248, 113, 20, .85), rgba(220, 38, 38, .85));
+      opacity: .4;
+      border-radius: 999px;
+      z-index: 0;
+    }
+
+    .process-steps::after {
+      content: '';
+      position: absolute;
+      top: 42px;
+      left: 50%;
+      transform: translateX(220px);
+      width: 12px;
+      height: 12px;
+      background: var(--secondary);
+      border-radius: 50%;
+      box-shadow: 0 0 18px rgba(249, 115, 22, .6);
+      z-index: 0;
+    }
+
+    .process-steps .p-step:nth-child(3)::after {
+      content: '';
+      position: absolute;
+      top: 22px;
+      right: -10px;
+      width: 18px;
+      height: 18px;
+      border: 1px solid rgba(248, 113, 20, .35);
+      border-radius: 50%;
+      opacity: .6;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .p-step {
+      flex: 1;
       text-align: center;
       padding: 0 12px;
       position: relative;
-      z-index: 1
+      z-index: 1;
+      min-width: 180px;
     }
 
     .p-circle {
-      width: 56px;
-      height: 56px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
-      margin: 0 auto 16px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin: 0 auto 18px;
+      background: radial-gradient(circle at top left, rgba(249, 115, 22, .96), rgba(220, 38, 38, 1));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: .82rem;
-      font-weight: 800;
+      font-size: 1rem;
+      font-weight: 900;
       font-family: 'Space Mono', monospace;
-      box-shadow: 0 0 20px rgba(220, 38, 38, .4)
+      color: #fff;
+      box-shadow: 0 0 30px rgba(220, 38, 38, .35);
     }
 
     .p-title {
-      font-size: .9rem;
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 6px
+      margin-bottom: 8px;
+      color: #f8fafc;
     }
 
     .p-desc {
-      font-size: .78rem;
-      color: var(--gray);
-      line-height: 1.65
+      font-size: .85rem;
+      color: rgba(226, 232, 240, .8);
+      line-height: 1.8;
+      max-width: 220px;
+      margin: 0 auto;
     }
 
     /* ══════════════════════════════════
@@ -1998,12 +2036,13 @@
       }
 
       .process-steps {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
       }
 
       .process-steps::before {
-        display: none
+        display: none;
       }
     }
 
@@ -2186,10 +2225,6 @@
 
       .stats-row {
         gap: 16px
-      }
-
-      .process-steps {
-        grid-template-columns: 1fr
       }
 
       .pfilt {
@@ -2516,7 +2551,6 @@
     min-height: 56px;
     text-align: center;
   ">
-    <i class="fa-solid fa-fire" aria-hidden="true" style="color:#fff;font-size:1rem"></i>
     <span>Limited Time Offer — Get <strong>20% OFF</strong> your first project!</span>
     <a href="#contact" style="
       background: #fff;
@@ -2768,7 +2802,7 @@
         <!-- Graphic Design -->
         <div class="svc-card rv" style="transition-delay:.04s">
           <div class="svc-n">01</div>
-          <div class="svc-icon"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
+          <div class="svc-icon"><i class="fa-solid fa-image" aria-hidden="true"></i></div>
           <div class="svc-title">Graphic Design</div>
           <div class="svc-desc">
             Creative branding, social media creatives, posters, banners, logos,
@@ -2838,7 +2872,7 @@
         <!-- UI/UX Design -->
         <div class="svc-card rv" style="transition-delay:.24s">
           <div class="svc-n">06</div>
-          <div class="svc-icon"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></div>
+          <div class="svc-icon"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
           <div class="svc-title">UI/UX Design</div>
           <div class="svc-desc">
             User-focused interfaces and seamless digital experiences crafted to
