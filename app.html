@@ -17,8 +17,9 @@
   <meta property="og:url" content="https://Graphicmart.agency" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet" />
   <style>
     /* ══════════════════════════════════
@@ -57,12 +58,13 @@
       background: var(--bg);
       color: var(--white);
       overflow-x: hidden;
-      cursor: none
+      cursor: none;
     }
 
     a {
       text-decoration: none;
-      color: inherit
+      color: inherit;
+      cursor: pointer;
     }
 
     ul {
@@ -71,7 +73,7 @@
 
     button {
       font-family: 'Poppins', sans-serif;
-      cursor: none
+      cursor: pointer;
     }
 
     img {
@@ -206,10 +208,20 @@
       font-size: 1.22rem;
       font-weight: 800;
       letter-spacing: -.5px;
-      background: linear-gradient(135deg, var(--white) 40%, var(--secondary));
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .gs-logo-name-text {
+      color: var(--white);
+    }
+
+    .gs-logo-name-accent {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text
+      background-clip: text;
     }
 
     .gs-logo-tag {
@@ -231,7 +243,14 @@
       right: 0;
       z-index: 1000;
       padding: 18px 0;
-      transition: all .35s var(--ease)
+      transition: all .35s var(--ease);
+    }
+
+    /* hide the fixed navbar while top announcement banner is visible */
+    #nav.nav-hidden {
+      transform: translateY(-140%);
+      pointer-events: none;
+      opacity: 0;
     }
 
     #nav.scrolled {
@@ -241,6 +260,72 @@
       -webkit-backdrop-filter: blur(22px);
       border-bottom: 1px solid var(--gborder);
       box-shadow: 0 4px 40px rgba(0, 0, 0, .4)
+    }
+
+    #top-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99996;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 84px 12px 16px;
+      min-height: 56px;
+      text-align: center;
+    }
+
+    #top-banner span {
+      min-width: 0;
+      flex: 1 1 auto;
+      white-space: normal;
+    }
+
+    #top-banner a {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      margin-left: 6px;
+    }
+
+    #top-banner-close {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #000;
+      border: none;
+      opacity: .98;
+      cursor: pointer;
+      z-index: 99999;
+    }
+
+    @media(max-width:720px) {
+      #top-banner {
+        padding: 12px 58px 12px 14px;
+        gap: 8px;
+      }
+
+      #top-banner-close {
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        font-size: .95rem;
+      }
+
+      #top-banner a {
+        padding: 8px 14px;
+        font-size: .72rem;
+      }
     }
 
     .nav-wrap {
@@ -348,15 +433,17 @@
       inset: 0;
       background: rgba(15, 8, 8, .97);
       backdrop-filter: blur(20px);
-      z-index: 999;
+      z-index: 99999;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 28px
+      justify-content: flex-start;
+      padding-top: 120px;
+      gap: 18px;
     }
 
     #mob.open {
-      display: flex
+      display: flex;
+      z-index: 99999;
     }
 
     #mob a {
@@ -416,6 +503,11 @@
     section {
       padding: 100px 0;
       position: relative
+    }
+
+    #hero {
+      padding: 0;
+      margin-top: 0;
     }
 
     .ctr {
@@ -530,20 +622,103 @@
     }
 
     /* ══════════════════════════════════
-       HERO
+       HERO — PURE FULL COVER IMAGE
     ══════════════════════════════════ */
     #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
+      width: 100%;
+      height: 55vh;
+      max-height: 640px;
+      min-height: 320px;
+      position: relative;
       overflow: hidden;
-      padding: 0
+      display: block;
     }
 
-    .h-bg {
+    .h-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      transition: opacity .45s ease;
+    }
+
+    .hero-slider {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .hero-slider-controls {
       position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 65% 40%, rgba(220, 38, 38, .16) 0%, transparent 60%), radial-gradient(ellipse 55% 45% at 15% 65%, rgba(249, 115, 22, .1) 0%, transparent 60%)
+      bottom: 20px;
+      right: 24px;
+      display: flex;
+      gap: 12px;
+      z-index: 2;
+    }
+
+    .hero-slider-controls button {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .24);
+      background: rgba(15, 8, 8, .72);
+      color: #fff;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .25s, transform .25s;
+      pointer-events: auto;
+    }
+
+    .hero-slider-controls button:hover {
+      background: rgba(255, 255, 255, .16);
+      transform: scale(1.05);
+    }
+
+    .hero-slider-dots {
+      position: absolute;
+      bottom: 18px;
+      left: 24px;
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .hero-slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .35);
+      cursor: pointer;
+      transition: background .25s, transform .25s;
+    }
+
+    .hero-slider-dot.active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+
+    @media(max-width: 1200px) {
+      #hero { height: 52vh; max-height: 560px }
+    }
+
+    @media(max-width: 900px) {
+      #hero { height: 48vh; max-height: 480px }
+    }
+
+    @media(max-width: 680px) {
+      #hero { height: 42vh; max-height: 420px }
+    }
+
+    @media(max-width: 520px) {
+      #hero { height: 38vh; max-height: 360px; min-height: 280px }
     }
 
     .h-grid {
@@ -611,13 +786,7 @@
       }
     }
 
-    .h-content {
-      position: relative;
-      z-index: 2;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 120px 24px 60px
-    }
+    /* h-content defined in hero section above */
 
     .h-badge {
       display: inline-flex;
@@ -912,60 +1081,98 @@
 
     /* process */
     .process {
-      margin-top: 90px
+      margin-top: 120px;
     }
 
     .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
       position: relative;
-      margin-top: 48px
+      margin-top: 48px;
+      padding: 0 24px;
     }
 
     .process-steps::before {
       content: '';
       position: absolute;
-      top: 27px;
-      left: 12.5%;
-      right: 12.5%;
+      top: 50px;
+      left: 24px;
+      right: 24px;
       height: 1px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      opacity: .3
+      background: linear-gradient(90deg, rgba(248, 113, 20, .85), rgba(220, 38, 38, .85));
+      opacity: .4;
+      border-radius: 999px;
+      z-index: 0;
+    }
+
+    .process-steps::after {
+      content: '';
+      position: absolute;
+      top: 42px;
+      left: 50%;
+      transform: translateX(220px);
+      width: 12px;
+      height: 12px;
+      background: var(--secondary);
+      border-radius: 50%;
+      box-shadow: 0 0 18px rgba(249, 115, 22, .6);
+      z-index: 0;
+    }
+
+    .process-steps .p-step:nth-child(3)::after {
+      content: '';
+      position: absolute;
+      top: 22px;
+      right: -10px;
+      width: 18px;
+      height: 18px;
+      border: 1px solid rgba(248, 113, 20, .35);
+      border-radius: 50%;
+      opacity: .6;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .p-step {
+      flex: 1;
       text-align: center;
       padding: 0 12px;
       position: relative;
-      z-index: 1
+      z-index: 1;
+      min-width: 180px;
     }
 
     .p-circle {
-      width: 56px;
-      height: 56px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
-      margin: 0 auto 16px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      margin: 0 auto 18px;
+      background: radial-gradient(circle at top left, rgba(249, 115, 22, .96), rgba(220, 38, 38, 1));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: .82rem;
-      font-weight: 800;
+      font-size: 1rem;
+      font-weight: 900;
       font-family: 'Space Mono', monospace;
-      box-shadow: 0 0 20px rgba(220, 38, 38, .4)
+      color: #fff;
+      box-shadow: 0 0 30px rgba(220, 38, 38, .35);
     }
 
     .p-title {
-      font-size: .9rem;
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 6px
+      margin-bottom: 8px;
+      color: #f8fafc;
     }
 
     .p-desc {
-      font-size: .78rem;
-      color: var(--gray);
-      line-height: 1.65
+      font-size: .85rem;
+      color: rgba(226, 232, 240, .8);
+      line-height: 1.8;
+      max-width: 220px;
+      margin: 0 auto;
     }
 
     /* ══════════════════════════════════
@@ -984,7 +1191,8 @@
 
     /* visual panel */
     .about-vis {
-      position: relative
+      position: relative;
+      width: 100%
     }
 
     .vis-wrap {
@@ -992,6 +1200,7 @@
       background: linear-gradient(135deg, rgba(220, 38, 38, .12), rgba(249, 115, 22, .07));
       border: 1px solid var(--gborder);
       aspect-ratio: 1;
+      min-height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1006,8 +1215,9 @@
     }
 
     .vis-svg {
-      width: 72%;
-      height: 72%
+      width: 85%;
+      height: 85%;
+      object-fit: contain
     }
 
     .afc {
@@ -1287,20 +1497,18 @@
     }
 
     .tm-wrap {
-      overflow: hidden;
       position: relative
     }
 
     .tm-track {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 22px;
-      transition: transform .5s var(--ease);
-      will-change: transform
+      transform: none;
     }
 
     .tm-card {
-      min-width: 370px;
-      flex-shrink: 0;
+      width: 100%;
       background: var(--glass);
       border: 1px solid var(--gborder);
       border-radius: var(--r);
@@ -1747,7 +1955,7 @@
       font-size: 1.5rem;
       box-shadow: 0 6px 22px rgba(37, 211, 102, .4);
       transition: all .3s;
-      cursor: none
+      cursor: pointer;
     }
 
     #wa:hover {
@@ -1774,7 +1982,7 @@
       opacity: 0;
       transform: translateY(8px);
       transition: all .3s;
-      cursor: none
+      cursor: pointer;
     }
 
     #totop.show {
@@ -1807,7 +2015,14 @@
       }
 
       .about-vis {
-        display: none
+        display: block;
+        margin: 0 auto;
+        max-width: 400px
+      }
+
+      .vis-wrap {
+        aspect-ratio: 1;
+        width: 100%
       }
 
       .con-grid {
@@ -1821,12 +2036,13 @@
       }
 
       .process-steps {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
       }
 
       .process-steps::before {
-        display: none
+        display: none;
       }
     }
 
@@ -1843,6 +2059,15 @@
         padding: 72px 0
       }
 
+      .about-vis {
+        max-width: 320px
+      }
+
+      .vis-svg {
+        width: 80% !important;
+        height: 80% !important
+      }
+
       .svc-grid {
         grid-template-columns: 1fr
       }
@@ -1854,6 +2079,25 @@
       .h-heading {
         font-size: clamp(2.2rem, 9vw, 3rem);
         letter-spacing: -1px
+      }
+
+      .h-content {
+        padding: 100px 24px 56px
+      }
+
+      .h-banner-floats {
+        position: static !important;
+        transform: none !important;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 28px;
+        gap: 10px
+      }
+
+      .h-fcard {
+        min-width: calc(50% - 5px);
+        flex: 1;
+        animation: none !important
       }
 
       .h-stats {
@@ -1886,6 +2130,17 @@
       .fnl {
         flex-direction: column
       }
+      /* mobile floating button tweaks */
+      #wa {
+        right: 16px;
+        bottom: 16px;
+      }
+
+      #totop {
+        right: 74px;
+        left: auto;
+        bottom: 16px;
+      }
     }
 
     @media(max-width:480px) {
@@ -1893,24 +2148,83 @@
         padding: 0 16px
       }
 
+      .about-vis {
+        max-width: 280px;
+        margin: 0 auto 32px
+      }
+
+      .vis-wrap {
+        border-radius: 16px
+      }
+
+      .vis-svg {
+        width: 75% !important;
+        height: 75% !important
+      }
+
+      .afc1, .afc2 {
+        padding: 12px 16px;
+        font-size: .9rem
+      }
+
+      .afc-n {
+        font-size: 1.3rem
+      }
+
+      .afc-l {
+        font-size: .65rem
+      }
+
       .h-content {
         padding: 100px 16px 48px
+      }
+
+      .h-banner-floats {
+        position: static !important;
+        transform: none !important;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-top: 32px;
+        gap: 12px
+      }
+
+      .h-fcard {
+        min-width: 140px;
+        flex: 1;
+        animation: none !important
       }
 
       .h-cta {
         flex-direction: column
       }
 
+      /* tweak floating buttons on very small screens */
+      #wa {
+        right: 16px;
+        bottom: 16px;
+        width: 48px;
+        height: 48px;
+      }
+
+      #totop {
+        right: 16px;
+        left: auto;
+        bottom: 76px;
+        width: 44px;
+        height: 44px;
+      }
+
+    }
+
+
+    /* merged mobile tweaks: moved into the existing 768px block above */
       .h-stat {
         min-width: calc(50% - 5px)
       }
 
       .stats-row {
         gap: 16px
-      }
-
-      .process-steps {
-        grid-template-columns: 1fr
       }
 
       .pfilt {
@@ -1937,78 +2251,347 @@
         height: 38px;
         font-size: .9rem
       }
+    /* ══════════════════════════════════
+       INTRO SPLIT SECTION
+    ══════════════════════════════════ */
+    #intro {
+      padding: 100px 0;
+      background: var(--bg2);
+      overflow: hidden
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px
+    }
+
+    /* ── LEFT IMAGE ── */
+    .intro-img-wrap {
+      position: relative;
+      border-radius: 24px;
+      overflow: visible
+    }
+
+    .intro-img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 24px;
+      display: block;
+      box-shadow:
+        0 40px 80px rgba(0,0,0,.55),
+        0 0 0 1px rgba(255,255,255,.06)
+    }
+
+    /* red glow behind image */
+    .intro-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 32px;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(220,38,38,.22) 0%, transparent 65%);
+      z-index: -1;
+      filter: blur(20px)
+    }
+
+    /* corner accent lines */
+    .intro-img-wrap::after {
+      content: '';
+      position: absolute;
+      top: -8px; left: -8px;
+      width: 80px; height: 80px;
+      border-top: 2.5px solid var(--primary);
+      border-left: 2.5px solid var(--primary);
+      border-radius: 8px 0 0 0;
+      pointer-events: none
+    }
+
+    .intro-img-corner-br {
+      position: absolute;
+      bottom: -8px; right: -8px;
+      width: 80px; height: 80px;
+      border-bottom: 2.5px solid var(--secondary);
+      border-right: 2.5px solid var(--secondary);
+      border-radius: 0 0 8px 0;
+      pointer-events: none
+    }
+
+    /* floating badge on image */
+    .intro-img-badge {
+      position: absolute;
+      bottom: 24px;
+      left: -20px;
+      background: rgba(10,3,3,.88);
+      border: 1px solid rgba(220,38,38,.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.5);
+      animation: floatbadge 4s ease-in-out infinite
+    }
+
+    .intro-badge-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(220,38,38,.3), rgba(249,115,22,.2));
+      border: 1px solid rgba(220,38,38,.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0
+    }
+
+    .intro-badge-text-n {
+      font-size: 1.1rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1
+    }
+
+    .intro-badge-text-l {
+      font-size: .68rem;
+      color: var(--gray);
+      margin-top: 2px
+    }
+
+    /* top-right badge */
+    .intro-img-badge2 {
+      position: absolute;
+      top: 24px;
+      right: -20px;
+      background: rgba(10,3,3,.88);
+      border: 1px solid rgba(249,115,22,.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 14px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.5);
+      animation: floatbadge 4s ease-in-out infinite 2s
+    }
+
+    .intro-live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 8px rgba(34,197,94,.6)
+    }
+
+    .intro-img-badge2 span {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--white)
+    }
+
+    /* ── RIGHT TEXT ── */
+    .intro-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0
+    }
+
+    .intro-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 22px
+    }
+
+    .intro-title .intro-grad {
+      background: linear-gradient(135deg, #ef4444 0%, #f97316 55%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .intro-desc {
+      font-size: 1.05rem;
+      color: var(--gray);
+      line-height: 1.9;
+      margin-bottom: 32px
+    }
+
+    /* highlight list */
+    .intro-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 36px
+    }
+
+    .intro-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: .9rem;
+      color: var(--white);
+      line-height: 1.6
+    }
+
+    .intro-list-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(220,38,38,.3), rgba(249,115,22,.2));
+      border: 1px solid rgba(220,38,38,.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: #f97316
+    }
+
+    /* CTA row */
+    .intro-note {
+      margin: 18px 0 24px;
+      color: var(--white);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 560px;
+      opacity: .92;
+    }
+
+    .intro-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .intro-cta .btn-pri {
+      padding: 16px 36px;
+      font-size: 1rem;
+    }
+
+    .intro-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .8rem;
+      color: var(--gray)
+    }
+
+    @media(max-width: 680px) {
+      .intro-cta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .intro-cta .btn-pri {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .intro-stars {
+      color: #fbbf24;
+      font-size: .9rem;
+      letter-spacing: 1px
+    }
+
+    /* responsive */
+    @media(max-width: 900px) {
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 44px
+      }
+      .intro-img {
+        height: 340px
+      }
+      .intro-img-badge { left: 12px; bottom: 12px }
+      .intro-img-badge2 { right: 12px; top: 12px }
+    }
+
+    @media(max-width: 480px) {
+      .intro-img { height: 260px }
+      .intro-img-badge, .intro-img-badge2 { position: static; margin-top: 12px; border-radius: 12px }
+      .intro-img-wrap { display: flex; flex-direction: column }
     }
   </style>
 </head>
 
-<body>
+ <body>
 
   <!-- ─── TOP ANNOUNCEMENT BANNER ─── -->
-<div id="top-banner" style="
-  background: linear-gradient(90deg, #991b1b, #dc2626, #f97316);
-  color: #fff;
-  text-align: center;
-  padding: 10px 20px;
-  font-size: .82rem;
-  font-weight: 600;
-  letter-spacing: .4px;
-  position: relative;
-  z-index: 99996;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-">
-  🔥 <span>Limited Time Offer — Get <strong>20% OFF</strong> your first project!</span>
-  <a href="#contact" style="
-    background: #fff;
-    color: #dc2626;
-    padding: 4px 14px;
-    border-radius: 99px;
-    font-size: .75rem;
-    font-weight: 700;
-    text-decoration: none;
-  ">Claim Now →</a>
-  <button onclick="document.getElementById('top-banner').style.display='none'" style="
-    position: absolute;
-    right: 16px;
-    background: none;
-    border: none;
+  <div id="top-banner" style="
+    background: linear-gradient(90deg, #991b1b, #dc2626, #f97316);
     color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    opacity: .8;
-  ">✕</button>
-</div>
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .4px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99996;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 84px 12px 16px;
+    min-height: 56px;
+    text-align: center;
+  ">
+    <span>Limited Time Offer — Get <strong>20% OFF</strong> your first project!</span>
+    <a href="#contact" style="
+      background: #fff;
+      color: #dc2626;
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: .75rem;
+      font-weight: 700;
+      text-decoration: none;
+    ">Claim Now →</a>
+    <button id="top-banner-close" aria-label="Close announcement" onclick="document.getElementById('top-banner').style.display='none'" style="
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border: none;
+      color: #000;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: .98;
+      z-index: 99999;
+    "><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+  </div>
   <!-- ─── LOADER ─── -->
   <div id="loader">
     <div class="ld-logo">
-      <!-- SVG Logo in Loader -->
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="lg1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#a855f7" />
-            <stop offset="1" stop-color="#06b6d4" />
-          </linearGradient>
-          <linearGradient id="lg2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#7c3aed" />
-            <stop offset="1" stop-color="#06b6d4" />
-          </linearGradient>
-        </defs>
-        <rect width="44" height="44" rx="12" fill="url(#lg2)" opacity=".15" />
-        <rect x="1" y="1" width="42" height="42" rx="11" stroke="url(#lg1)" stroke-width="1.2" fill="none" />
-        <!-- Pen nib / diamond shape -->
-        <polygon points="22,6 36,18 22,38 8,18" fill="none" stroke="url(#lg1)" stroke-width="1.6"
-          stroke-linejoin="round" />
-        <polygon points="22,11 31,18 22,33 13,18" fill="url(#lg2)" opacity=".25" />
-        <line x1="8" y1="18" x2="36" y2="18" stroke="url(#lg1)" stroke-width="1.2" />
-        <circle cx="22" cy="18" r="2.5" fill="url(#lg1)" />
-      </svg>
+      <img src="Gmart Logo00.png" alt="Graphicmart" width="44" height="44" style="display:block" />
       <div style="display:flex;flex-direction:column;gap:2px">
+        <span style="font-size:1.5rem;font-weight:900;letter-spacing:-.5px;display:inline-flex;gap:0">
+          <span style="color:#fff">Graphic</span>
+          <span style="background:linear-gradient(135deg,#dc2626,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">mart</span>
+        </span>
         <span
-          style="font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#f1f5f9 40%,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px">Graphicmart</span>
-        <span
-          style="font-size:.52rem;letter-spacing:2.5px;text-transform:uppercase;color:#8897b3;font-weight:600">Digital
+          style="font-size:.52rem;letter-spacing:2.5px;text-transform:uppercase;color:#8897b3;font-weight:600">
           Creative Agency</span>
       </div>
     </div>
@@ -2025,7 +2608,7 @@
   <!-- ─── SUCCESS POPUP ─── -->
   <div id="popup">
     <div class="pop">
-      <div class="pop-ico">🎉</div>
+      <div class="pop-ico"><i class="fa-solid fa-circle-check" aria-hidden="true"></i></div>
       <div class="pop-t">Message Sent!</div>
       <div class="pop-s">We'll reply within 24 hours. Looking forward to working with you!</div>
       <button class="btn btn-pri" onclick="document.getElementById('popup').classList.remove('show')">Close</button>
@@ -2034,38 +2617,20 @@
 
   <!-- ─── FLOATING BTNS ─── -->
   <!-- ─── FLOATING BTNS ─── -->
-  <a id="wa" href="https://wa.me/917667189326" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+  <a id="wa" href="https://wa.me/917667189326" target="_blank" rel="noopener" title="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
 
-  <button id="totop" onclick="scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+  <button id="totop" type="button" aria-label="Back to top" title="Back to top">↑</button>
   <!-- ══════════════════════════════════
      NAVBAR
-══════════════════════════════════ -->
+  ══════════════════════════════════ -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-wrap">
 
       <!-- LOGO -->
-      <a href="#hero" class="gs-logo" aria-label="Graphicmart Home">
-        <svg class="gs-logo-mark" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="nlg1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#a855f7" />
-              <stop offset="1" stop-color="#06b6d4" />
-            </linearGradient>
-            <linearGradient id="nlg2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#7c3aed" />
-              <stop offset="1" stop-color="#06b6d4" />
-            </linearGradient>
-          </defs>
-          <rect width="44" height="44" rx="12" fill="url(#nlg2)" opacity=".18" />
-          <rect x="1" y="1" width="42" height="42" rx="11" stroke="url(#nlg1)" stroke-width="1.2" fill="none" />
-          <polygon points="22,6 36,18 22,38 8,18" fill="none" stroke="url(#nlg1)" stroke-width="1.6"
-            stroke-linejoin="round" />
-          <polygon points="22,11 31,18 22,33 13,18" fill="url(#nlg2)" opacity=".3" />
-          <line x1="8" y1="18" x2="36" y2="18" stroke="url(#nlg1)" stroke-width="1.2" />
-          <circle cx="22" cy="18" r="2.5" fill="url(#nlg1)" />
-        </svg>
+      <a href="#" class="gs-logo" aria-label="Graphicmart Home">
+        <img class="gs-logo-mark" src="Gmart Logo00.png" alt="Graphicmart logo" width="38" height="38" />
         <div class="gs-logo-text">
-          <span class="gs-logo-name">Graphicmart</span>
+          <span class="gs-logo-name"><span class="gs-logo-name-text">Graphic</span><span class="gs-logo-name-accent">mart</span></span>
           <span class="gs-logo-tag">Creative Agency</span>
         </div>
       </a>
@@ -2073,10 +2638,10 @@
       <ul class="nav-links" role="list">
         <li><a href="#hero" class="act">Home</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#about">About Us</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
-        <li><a href="#contact" class="nav-cta">Get Started</a></li>
+        <li><a href="#products">Our Products</a></li>
+        <li><a href="#contact" class="nav-cta">Contact Us</a></li>
       </ul>
       <button class="hbg" id="hbg" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -2086,61 +2651,115 @@
 
   <!-- MOBILE MENU -->
   <div id="mob" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-    <button id="mob-close" aria-label="Close menu">✕</button>
+    <button id="mob-close" aria-label="Close menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     <a href="#hero" onclick="closeMob()">Home</a>
     <a href="#services" onclick="closeMob()">Services</a>
-    <a href="#about" onclick="closeMob()">About</a>
+    <a href="#about" onclick="closeMob()">About Us</a>
     <a href="#portfolio" onclick="closeMob()">Portfolio</a>
-    <a href="#testimonials" onclick="closeMob()">Reviews</a>
-    <a href="#contact" onclick="closeMob()" style="color:var(--pri-light)">Get Started →</a>
+    <a href="#products" onclick="closeMob()">Our Products</a>
+    <a href="#contact" onclick="closeMob()" style="color:var(--pri-light)">Contact Us →</a>
   </div>
 
+
   <!-- ══════════════════════════════════
-     HERO
+     HERO — PURE FULL COVER IMAGE
 ══════════════════════════════════ -->
   <section id="hero" aria-label="Hero">
-    <div class="h-bg" aria-hidden="true"></div>
-    <div class="h-grid" aria-hidden="true"></div>
-    <canvas id="pcanvas" aria-hidden="true"></canvas>
-    <div class="blob b1" aria-hidden="true"></div>
-    <div class="blob b2" aria-hidden="true"></div>
-    <div class="blob b3" aria-hidden="true"></div>
+    <div class="hero-slider">
+      <img
+        id="heroImg"
+        class="h-cover-img"
+        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&auto=format&fit=crop&q=90"
+        alt="Graphicmart Digital Creative Agency"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero-slider-controls">
+        <button id="heroPrev" type="button" aria-label="Previous slide"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+        <button id="heroNext" type="button" aria-label="Next slide"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <div class="hero-slider-dots" id="heroDots" aria-label="Slide navigation"></div>
+    </div>
+    <canvas id="pcanvas" aria-hidden="true" style="display:none"></canvas>
+  </section>
 
-    <div class="h-content">
-      <div class="h-badge" aria-label="Status">
-        <div class="h-dot" aria-hidden="true"></div>
-        Available for New Projects
-      </div>
-      <h1 class="h-heading">
-        Transform Your<br>
-        <span class="accent-line">Digital Presence</span>
-      </h1>
-      <p class="h-sub">We build modern websites, stunning graphics, and high-converting video content that elevates your
-        brand to the next level.</p>
-      <div class="h-type" aria-live="polite">
-        &gt;&nbsp;<span id="typed"></span><span id="tcur" style="animation:blink 1s infinite">|</span>
-      </div>
-      <div class="h-cta">
-        <a href="#contact" class="btn btn-pri">Get Started →</a>
-        <a href="#portfolio" class="btn btn-out">View Portfolio</a>
-      </div>
-      <div class="h-stats" role="list" aria-label="Agency stats">
-        <div class="h-stat" role="listitem">
-          <div class="h-stat-n">200+</div>
-          <div class="h-stat-l">Projects Done</div>
+  <!-- ══════════════════════════════════
+     INTRO — IMAGE + TEXT SPLIT
+  ══════════════════════════════════ -->
+  <section id="intro" aria-label="About intro">
+    <div class="ctr">
+      <div class="intro-grid">
+
+        <!-- LEFT: Image -->
+        <div class="intro-img-wrap rv-l">
+          <img
+            class="intro-img"
+            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&auto=format&fit=crop&q=85"
+            alt="Graphicmart creative team at work"
+            loading="lazy"
+          />
+          <div class="intro-img-corner-br"></div>
+
+          <!-- bottom-left floating badge -->
+          <div class="intro-img-badge">
+            <div class="intro-badge-icon"><i class="fa-solid fa-trophy" aria-hidden="true"></i></div>
+            <div>
+              <div class="intro-badge-text-n">600+ Projects</div>
+              <div class="intro-badge-text-l">Successfully delivered</div>
+            </div>
+          </div>
+
+          <!-- top-right floating badge -->
+          <div class="intro-img-badge2">
+            <div class="intro-live-dot"></div>
+            <span>Active Agency Since 2022</span>
+          </div>
         </div>
-        <div class="h-stat" role="listitem">
-          <div class="h-stat-n">98%</div>
-          <div class="h-stat-l">Satisfaction</div>
+
+        <!-- RIGHT: Text -->
+        <div class="intro-text rv-r">
+          <div class="s-tag">Who We Are</div>
+
+          <h2 class="intro-title">
+            We Build Brands<br>
+            That <span class="intro-grad">Dominate</span><br>
+            <span class="intro-grad">Digitally</span>
+          </h2>
+
+          <p class="intro-desc">
+            From pixel-perfect websites to scroll-stopping graphics and cinematic video — Graphicmart crafts digital experiences that convert, captivate, and command attention.
+          </p>
+
+          <ul class="intro-list">
+            <li class="intro-list-item">
+              <div class="intro-list-icon"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
+              <span>Modern, blazing-fast websites built to rank and convert</span>
+            </li>
+            <li class="intro-list-item">
+              <div class="intro-list-icon"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
+              <span>Brand identities and graphic design that leave a lasting impression</span>
+            </li>
+            <li class="intro-list-item">
+              <div class="intro-list-icon"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
+              <span>Cinematic video content engineered to stop the scroll</span>
+            </li>
+            <li class="intro-list-item">
+              <div class="intro-list-icon"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
+              <span>End-to-end SEO and social media strategies that grow your audience</span>
+            </li>
+          </ul>
+
+          <div class="intro-note">Ready to launch your brand with a bold website, sharp visuals, and a conversion-first strategy.</div>
+
+          <div class="intro-cta">
+            <a href="#contact" class="btn btn-pri">Start Your Project →</a>
+            <div class="intro-rating">
+              <span class="intro-stars">★★★★★</span>
+              <span>5.0 · 98% satisfaction rate</span>
+            </div>
+          </div>
         </div>
-        <div class="h-stat" role="listitem">
-          <div class="h-stat-n">5.0★</div>
-          <div class="h-stat-l">Rating</div>
-        </div>
-        <div class="h-stat" role="listitem">
-          <div class="h-stat-n">4yr+</div>
-          <div class="h-stat-l">Experience</div>
-        </div>
+
       </div>
     </div>
   </section>
@@ -2148,23 +2767,19 @@
   <!-- TICKER -->
   <div class="ticker-wrap" aria-hidden="true">
     <div class="ticker-track" id="ticker">
-      <div class="ticker-item">Website Design<span class="ticker-dot"></span></div>
       <div class="ticker-item">Graphic Design<span class="ticker-dot"></span></div>
+      <div class="ticker-item">Print On Demand<span class="ticker-dot"></span></div>
+      <div class="ticker-item">Digital Marketing<span class="ticker-dot"></span></div>
       <div class="ticker-item">Video Editing<span class="ticker-dot"></span></div>
-      <div class="ticker-item">SEO Optimization<span class="ticker-dot"></span></div>
-      <div class="ticker-item">Landing Pages<span class="ticker-dot"></span></div>
-      <div class="ticker-item">Social Media Branding<span class="ticker-dot"></span></div>
-      <div class="ticker-item">Premium Design<span class="ticker-dot"></span></div>
-      <div class="ticker-item">Graphicmart Agency<span class="ticker-dot"></span></div>
+      <div class="ticker-item">Web & App Development<span class="ticker-dot"></span></div>
+      <div class="ticker-item">UI/UX Design<span class="ticker-dot"></span></div>
       <!-- duplicate for seamless loop -->
-      <div class="ticker-item">Website Design<span class="ticker-dot"></span></div>
       <div class="ticker-item">Graphic Design<span class="ticker-dot"></span></div>
+      <div class="ticker-item">Print On Demand<span class="ticker-dot"></span></div>
+      <div class="ticker-item">Digital Marketing<span class="ticker-dot"></span></div>
       <div class="ticker-item">Video Editing<span class="ticker-dot"></span></div>
-      <div class="ticker-item">SEO Optimization<span class="ticker-dot"></span></div>
-      <div class="ticker-item">Landing Pages<span class="ticker-dot"></span></div>
-      <div class="ticker-item">Social Media Branding<span class="ticker-dot"></span></div>
-      <div class="ticker-item">Premium Design<span class="ticker-dot"></span></div>
-      <div class="ticker-item">Graphicmart Agency<span class="ticker-dot"></span></div>
+      <div class="ticker-item">Web & App Development<span class="ticker-dot"></span></div>
+      <div class="ticker-item">UI/UX Design<span class="ticker-dot"></span></div>
     </div>
   </div>
 
@@ -2176,52 +2791,98 @@
       <div class="svc-head rv">
         <div class="s-tag">What We Do</div>
         <h2 class="s-title">Services Built for <span class="grad">Growth</span></h2>
-        <p class="s-sub">A full suite of digital services designed to make your brand impossible to ignore — online and
-          offline.</p>
+        <p class="s-sub">
+          Powerful digital solutions crafted to elevate your brand, grow your audience,
+          and turn visitors into loyal customers.
+        </p>
       </div>
+
       <div class="svc-grid">
+
+        <!-- Graphic Design -->
         <div class="svc-card rv" style="transition-delay:.04s">
           <div class="svc-n">01</div>
-          <div class="svc-icon">🌐</div>
-          <div class="svc-title">Website Design</div>
-          <div class="svc-desc">Custom-built, blazing-fast websites that convert visitors into customers. Modern,
-            responsive, SEO-ready.</div><a href="#contact" class="svc-arrow">Learn more <span>→</span></a>
+          <div class="svc-icon"><i class="fa-solid fa-image" aria-hidden="true"></i></div>
+          <div class="svc-title">Graphic Design</div>
+          <div class="svc-desc">
+            Creative branding, social media creatives, posters, banners, logos,
+            and marketing materials designed to make your brand stand out.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
         </div>
+
+        <!-- Print On Demand -->
         <div class="svc-card rv" style="transition-delay:.08s">
           <div class="svc-n">02</div>
-          <div class="svc-icon">🎨</div>
-          <div class="svc-title">Graphic Design</div>
-          <div class="svc-desc">Brand identities, logos, print, and digital materials crafted to leave a lasting
-            impression on your audience.</div><a href="#contact" class="svc-arrow">Learn more <span>→</span></a>
+          <div class="svc-icon"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i></div>
+          <div class="svc-title">Print On Demand</div>
+          <div class="svc-desc">
+            Custom t-shirts, hoodies, mugs, posters, and merchandise solutions
+            with modern designs built for online selling and branding.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
         </div>
+
+        <!-- Digital Marketing -->
         <div class="svc-card rv" style="transition-delay:.12s">
           <div class="svc-n">03</div>
-          <div class="svc-icon">🎬</div>
-          <div class="svc-title">Video Editing</div>
-          <div class="svc-desc">Cinematic brand videos, reels, and ad-ready content edited to stop the scroll and drive
-            real engagement.</div><a href="#contact" class="svc-arrow">Learn more <span>→</span></a>
+          <div class="svc-icon"><i class="fa-solid fa-rocket" aria-hidden="true"></i></div>
+          <div class="svc-title">Digital Marketing</div>
+          <div class="svc-desc">
+            SEO, social media campaigns, paid ads, and growth strategies that
+            increase visibility, traffic, and conversions.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
         </div>
+
+        <!-- Video Editing -->
         <div class="svc-card rv" style="transition-delay:.16s">
           <div class="svc-n">04</div>
-          <div class="svc-icon">🔍</div>
-          <div class="svc-title">SEO Optimization</div>
-          <div class="svc-desc">Data-driven SEO that pushes your site to page one — bringing organic traffic that
-            actually converts.</div><a href="#contact" class="svc-arrow">Learn more <span>→</span></a>
+          <div class="svc-icon"><i class="fa-solid fa-film" aria-hidden="true"></i></div>
+          <div class="svc-title">Video Editing</div>
+          <div class="svc-desc">
+            Branded reels, promo videos, and motion content edited for engagement,
+            storytelling, and higher conversion performance.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
         </div>
-        <div class="svc-card rv" style="transition-delay:.2s">
+
+        <!-- Web & App Development -->
+        <div class="svc-card rv" style="transition-delay:.20s">
           <div class="svc-n">05</div>
-          <div class="svc-icon">🚀</div>
-          <div class="svc-title">Landing Page Design</div>
-          <div class="svc-desc">Conversion-focused pages engineered with proven UX principles to maximize ROI and grow
-            your business.</div><a href="#contact" class="svc-arrow">Learn more <span>→</span></a>
+          <div class="svc-icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></div>
+          <div class="svc-title">Web & App Development</div>
+          <div class="svc-desc">
+            Fast, responsive websites and scalable applications built for smooth
+            performance, strong UX, and measurable growth.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
         </div>
+
+        <!-- UI/UX Design -->
         <div class="svc-card rv" style="transition-delay:.24s">
           <div class="svc-n">06</div>
-          <div class="svc-icon">📱</div>
-          <div class="svc-title">Social Media Branding</div>
-          <div class="svc-desc">Thumb-stopping posts, stories, and highlight covers that build community and grow your
-            following fast.</div><a href="#contact" class="svc-arrow">Learn more <span>→</span></a>
+          <div class="svc-icon"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
+          <div class="svc-title">UI/UX Design</div>
+          <div class="svc-desc">
+            User-focused interfaces and seamless digital experiences crafted to
+            improve engagement, usability, and customer satisfaction.
+          </div>
+          <a href="#contact" class="svc-arrow">
+            Learn more <span>→</span>
+          </a>
         </div>
+
       </div>
 
       <!-- Process -->
@@ -2230,27 +2891,41 @@
           <div class="s-tag">How We Work</div>
           <h2 class="s-title">Our <span class="grad">Process</span></h2>
         </div>
+
         <div class="process-steps">
+
           <div class="p-step">
             <div class="p-circle">01</div>
-            <div class="p-title">Discovery</div>
-            <div class="p-desc">We learn your goals, audience, and brand voice in depth.</div>
+            <div class="p-title">Research</div>
+            <div class="p-desc">
+              We understand your business goals, audience, and market strategy.
+            </div>
           </div>
+
           <div class="p-step">
             <div class="p-circle">02</div>
-            <div class="p-title">Strategy</div>
-            <div class="p-desc">We craft a data-driven plan aligned with your objectives.</div>
+            <div class="p-title">Planning</div>
+            <div class="p-desc">
+              Creating a structured roadmap with design, marketing, and development goals.
+            </div>
           </div>
+
           <div class="p-step">
             <div class="p-circle">03</div>
-            <div class="p-title">Design</div>
-            <div class="p-desc">Wireframes, mockups, and creative execution at its finest.</div>
+            <div class="p-title">Execution</div>
+            <div class="p-desc">
+              Our team designs, develops, and optimizes every detail with precision.
+            </div>
           </div>
+
           <div class="p-step">
             <div class="p-circle">04</div>
-            <div class="p-title">Launch</div>
-            <div class="p-desc">Delivery, testing, and live deployment with full support.</div>
+            <div class="p-title">Launch & Growth</div>
+            <div class="p-desc">
+              We launch your project successfully and help scale your digital presence.
+            </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -2267,51 +2942,10 @@
           <div class="vis-wrap">
             <div class="vis-bg" aria-hidden="true"></div>
             <!-- Large decorative SVG logo in about section -->
-            <svg class="vis-svg" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg"
-              aria-label="Graphicmart logo illustration">
-              <defs>
-                <linearGradient id="vlg1" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#a855f7" />
-                  <stop offset="1" stop-color="#06b6d4" />
-                </linearGradient>
-                <linearGradient id="vlg2" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#7c3aed" />
-                  <stop offset="1" stop-color="#06b6d4" />
-                </linearGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <!-- outer ring -->
-              <circle cx="80" cy="80" r="76" stroke="url(#vlg1)" stroke-width="1" stroke-dasharray="4 6" opacity=".3" />
-              <circle cx="80" cy="80" r="60" stroke="url(#vlg1)" stroke-width=".8" opacity=".15" />
-              <!-- diamond shape -->
-              <polygon points="80,18 128,66 80,148 32,66" fill="none" stroke="url(#vlg1)" stroke-width="2.2"
-                stroke-linejoin="round" filter="url(#glow)" />
-              <!-- inner fill -->
-              <polygon points="80,24 122,68 80,140 38,68" fill="url(#vlg2)" opacity=".18" />
-              <!-- horizontal line -->
-              <line x1="32" y1="66" x2="128" y2="66" stroke="url(#vlg1)" stroke-width="1.5" />
-              <!-- center diamond -->
-              <polygon points="80,54 94,66 80,80 66,66" fill="url(#vlg1)" opacity=".7" />
-              <!-- sparkles -->
-              <circle cx="80" cy="66" r="5" fill="url(#vlg1)" filter="url(#glow)" />
-              <circle cx="42" cy="38" r="2.5" fill="#a855f7" opacity=".5" />
-              <circle cx="118" cy="110" r="2.5" fill="#06b6d4" opacity=".5" />
-              <circle cx="120" cy="42" r="2" fill="#f59e0b" opacity=".4" />
-              <circle cx="40" cy="108" r="2" fill="#a855f7" opacity=".4" />
-              <!-- small stars -->
-              <text x="74" y="108" font-size="10" fill="url(#vlg1)" opacity=".5" font-family="sans-serif">★</text>
-              <text x="56" y="52" font-size="7" fill="#06b6d4" opacity=".4" font-family="sans-serif">✦</text>
-              <text x="100" y="58" font-size="7" fill="#a855f7" opacity=".4" font-family="sans-serif">✦</text>
-            </svg>
+            <img class="vis-svg" src="Gmart Logo00.png" alt="Graphicmart logo illustration" />
           </div>
           <div class="afc afc1">
-            <div class="afc-n">200+</div>
+            <div class="afc-n">600+</div>
             <div class="afc-l">Projects Delivered</div>
           </div>
           <div class="afc afc2">
@@ -2351,7 +2985,7 @@
           </div>
           <div class="stats-row">
             <div class="stat-item">
-              <div class="stat-n" data-t="200">0</div>
+              <div class="stat-n" data-t="600">0</div>
               <div class="stat-l">Projects</div>
             </div>
             <div class="stat-item">
@@ -2359,7 +2993,7 @@
               <div class="stat-l">% Satisfaction</div>
             </div>
             <div class="stat-item">
-              <div class="stat-n" data-t="50">0</div>
+              <div class="stat-n" data-t="250">0</div>
               <div class="stat-l">Clients</div>
             </div>
             <div class="stat-item">
@@ -2373,7 +3007,7 @@
       <!-- CTA band -->
       <div class="cta-band rv" style="margin-top:80px">
         <div class="cta-band-t">Ready to <span class="grad">Level Up Your Brand?</span></div>
-        <p class="cta-band-s">Join 50+ businesses that transformed their digital presence with Graphicmart.</p>
+        <p class="cta-band-s">Join 250+ businesses that transformed their digital presence with Graphicmart.</p>
         <div class="cta-band-btns">
           <a href="#contact" class="btn btn-pri">Start a Project</a>
           <a href="#services" class="btn btn-out">Explore Services</a>
@@ -2394,25 +3028,16 @@
       </div>
       <div class="pfilt rv">
         <button class="pf on" data-f="all">All Work</button>
-        <button class="pf" data-f="web">Web Design</button>
-        <button class="pf" data-f="graphic">Graphic</button>
-        <button class="pf" data-f="video">Video</button>
-        <button class="pf" data-f="seo">SEO & Landing</button>
+        <button class="pf" data-f="graphic">Graphic Design</button>
+        <button class="pf" data-f="print">Print On Demand</button>
+        <button class="pf" data-f="marketing">Digital Marketing</button>
+        <button class="pf" data-f="video">Video Editing</button>
+        <button class="pf" data-f="webapp">Web & App Development</button>
+        <button class="pf" data-f="uiux">UI/UX Design</button>
       </div>
       <div class="pgrid" id="pgrid">
-        <div class="pc rv" data-c="web" style="transition-delay:.04s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#1e1b4b,#312e81)">🌐</div>
-          <div class="pc-ov">
-            <div class="pc-vbtn">View Project</div>
-          </div>
-          <div class="pc-info">
-            <div class="pc-cat">Web Design</div>
-            <div class="pc-title">FinTech Dashboard Redesign</div>
-            <div class="pc-desc">A full UI overhaul for a fintech startup — 40% better engagement post-launch.</div>
-          </div>
-        </div>
         <div class="pc rv" data-c="graphic" style="transition-delay:.08s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#4c1d95,#6d28d9)">🎨</div>
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#4c1d95,#6d28d9)"><i class="fa-solid fa-image" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
@@ -2422,8 +3047,19 @@
             <div class="pc-desc">Complete brand kit — logo, typography, and brand guidelines for a fashion house.</div>
           </div>
         </div>
+        <div class="pc rv" data-c="print" style="transition-delay:.04s">
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#1e1b4b,#312e81)"><i class="fa-solid fa-box-open" aria-hidden="true"></i></div>
+          <div class="pc-ov">
+            <div class="pc-vbtn">View Project</div>
+          </div>
+          <div class="pc-info">
+            <div class="pc-cat">Print On Demand</div>
+            <div class="pc-title">Custom Merch Collection</div>
+            <div class="pc-desc">On-demand apparel, packaging, and print assets designed for a new lifestyle label.</div>
+          </div>
+        </div>
         <div class="pc rv" data-c="video" style="transition-delay:.12s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#164e63,#0e7490)">🎬</div>
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#164e63,#0e7490)"><i class="fa-solid fa-film" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
@@ -2433,37 +3069,37 @@
             <div class="pc-desc">High-energy reel series — 500K+ views and a sold-out product launch.</div>
           </div>
         </div>
-        <div class="pc rv" data-c="seo" style="transition-delay:.16s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#78350f,#b45309)">🚀</div>
+        <div class="pc rv" data-c="marketing" style="transition-delay:.16s">
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#78350f,#b45309)"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
           <div class="pc-info">
-            <div class="pc-cat">Landing Page</div>
+            <div class="pc-cat">Digital Marketing</div>
             <div class="pc-title">SaaS Conversion Funnel</div>
             <div class="pc-desc">A funnel that achieved 8.2% conversion rate — 3× the industry average.</div>
           </div>
         </div>
-        <div class="pc rv" data-c="web" style="transition-delay:.2s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#134e4a,#0f766e)">🌿</div>
+        <div class="pc rv" data-c="webapp" style="transition-delay:.2s">
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#134e4a,#0f766e)"><i class="fa-solid fa-globe" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
           <div class="pc-info">
-            <div class="pc-cat">Web Design</div>
-            <div class="pc-title">Wellness Platform</div>
-            <div class="pc-desc">A calming, accessible web experience for a health & wellness subscription.</div>
+            <div class="pc-cat">Web & App Development</div>
+            <div class="pc-title">FinTech Dashboard Redesign</div>
+            <div class="pc-desc">A full UI overhaul for a fintech startup — 40% better engagement post-launch.</div>
           </div>
         </div>
-        <div class="pc rv" data-c="graphic" style="transition-delay:.24s">
-          <div class="pc-thumb" style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8)">📱</div>
+        <div class="pc rv" data-c="uiux" style="transition-delay:.24s">
+          <div class="pc-thumb" style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8)"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
           <div class="pc-ov">
             <div class="pc-vbtn">View Project</div>
           </div>
           <div class="pc-info">
-            <div class="pc-cat">Social Media</div>
-            <div class="pc-title">Instagram Branding Suite</div>
-            <div class="pc-desc">50+ templates, highlight covers, and story designs — followers up 300%.</div>
+            <div class="pc-cat">UI/UX Design</div>
+            <div class="pc-title">Wellness Platform</div>
+            <div class="pc-desc">A calming, accessible web experience designed for a health & wellness subscription.</div>
           </div>
         </div>
       </div>
@@ -2532,11 +3168,6 @@
           </div>
         </div>
       </div>
-      <div class="tm-ctrl">
-        <button class="tmbtn" id="tmprev" aria-label="Previous testimonial">←</button>
-        <div class="tm-dots" id="tmdots"></div>
-        <button class="tmbtn" id="tmnext" aria-label="Next testimonial">→</button>
-      </div>
     </div>
   </section>
 
@@ -2556,58 +3187,61 @@
               <div class="con-ico">📧</div>
               <div>
                 <div class="con-it">Email Address</div>
-                <div class="con-iv">malikniharika048@gmail.com</div>
+                <div class="con-iv">yuvidollarama@gmail.com</div>
               </div>
             </div>
             <div class="con-item">
               <div class="con-ico">📞</div>
               <div>
                 <div class="con-it">Phone Number</div>
-                <div class="con-iv">+19 6280173629</div>
+                <div class="con-iv">+91 7667189326</div>
               </div>
             </div>
             <div class="con-item">
               <div class="con-ico">📍</div>
               <div>
                 <div class="con-it">Location</div>
-                <div class="con-iv">Remote — Available Worldwide</div>
+                <div class="con-iv">Main Market, Sant Nagar, New Delhi-110084</div>
               </div>
             </div>
           </div>
           <div class="soc-links">
-            <a href="#" class="soc" title="Instagram" aria-label="Instagram">📸</a>
-            <a href="#" class="soc" title="LinkedIn" aria-label="LinkedIn">💼</a>
-            <a href="#" class="soc" title="Twitter" aria-label="Twitter">🐦</a>
-            <a href="#" class="soc" title="Behance" aria-label="Behance">🎨</a>
-            <a href="#" class="soc" title="YouTube" aria-label="YouTube">▶️</a>
+            <a href="https://instagram.com/" target="_blank" class="soc" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com/" target="_blank" class="soc" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://youtube.com/" target="_blank" class="soc" title="YouTube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://twitter.com/" target="_blank" class="soc" title="Twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/niharika-malik-0066b7251/" target="_blank" class="soc" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/917667189326" target="_blank" class="soc" title="WhatsApp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
           </div>
         </div>
         <div class="rv-r">
           <div class="cf">
             <form id="cform" novalidate>
               <div class="fg"><label for="fname">Full Name</label><input type="text" id="fname"
-                  placeholder="Your full name" autocomplete="name" />
+                  placeholder="Your full name" autocomplete="name" required aria-required="true" />
                 <div class="ferr" id="ferr-n">Please enter your name.</div>
               </div>
               <div class="fg"><label for="femail">Email Address</label><input type="email" id="femail"
-                  placeholder="you@example.com" autocomplete="email" />
+                  placeholder="you@example.com" autocomplete="email" required aria-required="true" />
                 <div class="ferr" id="ferr-e">Please enter a valid email.</div>
               </div>
               <div class="fg"><label for="fservice">Service Needed</label>
-                <select id="fservice">
+                <select id="fservice" required aria-required="true">
                   <option value="">— Select a service —</option>
-                  <option>Website Design</option>
                   <option>Graphic Design</option>
+                  <option>Print on Demand</option>
+                  <option>Digital Marketing</option>
                   <option>Video Editing</option>
-                  <option>SEO Optimization</option>
-                  <option>Landing Page Design</option>
-                  <option>Social Media Branding</option>
+                  <option>Web & App Development</option>
+                  <option>UI/UX Design</option>
                   <option>Multiple Services</option>
+                  <option>Others</option>
                 </select>
                 <div class="ferr" id="ferr-s">Please select a service.</div>
               </div>
               <div class="fg"><label for="fmsg">Your Message</label><textarea id="fmsg"
-                  placeholder="Tell us about your project, goals, and timeline..."></textarea>
+                  placeholder="Tell us about your project, goals, and timeline..." required aria-required="true"></textarea>
                 <div class="ferr" id="ferr-m">Please write a brief message (min 10 characters).</div>
               </div>
               <button type="submit" class="btn btn-pri sub-btn">Send Message →</button>
@@ -2626,33 +3260,14 @@
       <div class="foot-grid">
         <div>
           <!-- Footer Logo -->
-          <a href="#hero" class="gs-logo" style="margin-bottom:2px">
-            <svg style="width:34px;height:34px" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="flg1" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#a855f7" />
-                  <stop offset="1" stop-color="#06b6d4" />
-                </linearGradient>
-                <linearGradient id="flg2" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#7c3aed" />
-                  <stop offset="1" stop-color="#06b6d4" />
-                </linearGradient>
-              </defs>
-              <rect width="44" height="44" rx="12" fill="url(#flg2)" opacity=".18" />
-              <rect x="1" y="1" width="42" height="42" rx="11" stroke="url(#flg1)" stroke-width="1.2" fill="none" />
-              <polygon points="22,6 36,18 22,38 8,18" fill="none" stroke="url(#flg1)" stroke-width="1.6"
-                stroke-linejoin="round" />
-              <polygon points="22,11 31,18 22,33 13,18" fill="url(#flg2)" opacity=".3" />
-              <line x1="8" y1="18" x2="36" y2="18" stroke="url(#flg1)" stroke-width="1.2" />
-              <circle cx="22" cy="18" r="2.5" fill="url(#flg1)" />
-            </svg>
+          <a href="#" class="gs-logo" style="margin-bottom:2px">
+            <img class="gs-logo-mark" src="Gmart Logo00.png" alt="Graphicmart logo" width="34" height="34" style="width:34px;height:34px" />
             <div class="gs-logo-text">
               <span class="gs-logo-name">Graphicmart</span>
               <span class="gs-logo-tag">Creative Agency</span>
             </div>
           </a>
-          <p class="foot-desc">A premium digital agency crafting brands, websites, and content that dominate the digital
-            landscape — worldwide.</p>
+          <p class="foot-desc">A premium digital agency crafting brands, websites, designing and printing content that dominate the digital landscape — worldwide.</p>
           <div class="fnl-label">Subscribe for Updates</div>
           <div class="fnl"><input type="email" placeholder="Enter your email" aria-label="Newsletter email" /><button
               type="button">Subscribe</button></div>
@@ -2664,34 +3279,35 @@
             <li><a href="#services">Services</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#services">Our Products</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
         <div>
           <div class="fc-title">Services</div>
-          <ul class="fclinks">
-            <li><a href="#services">Website Design</a></li>
-            <li><a href="#services">Graphic Design</a></li>
-            <li><a href="#services">Video Editing</a></li>
-            <li><a href="#services">SEO Optimization</a></li>
-            <li><a href="#services">Landing Pages</a></li>
-            <li><a href="#services">Social Media</a></li>
-          </ul>
+        <ul class="fclinks">
+          <li><a href="#services">Graphic Design</a></li>
+          <li><a href="#services">Print On Demand</a></li>
+          <li><a href="#services">Digital Marketing</a></li>
+          <li><a href="#services">Video Editing</a></li>
+          <li><a href="#services">Web & App Development</a></li>
+          <li><a href="#services">UI/UX Design</a></li>
+        </ul>
         </div>
         <div>
           <div class="fc-title">Connect</div>
           <ul class="fclinks">
             <li><a href="#">Instagram</a></li>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Twitter / X</a></li>
-            <li><a href="#">Behance</a></li>
+            <li><a href="#">Facebook</a></li>
             <li><a href="#">YouTube</a></li>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="#">LinkedIn</a></li>
             <li><a href="#">WhatsApp</a></li>
           </ul>
         </div>
       </div>
       <div class="foot-btm">
-        <div class="foot-copy">© 2025 <span>Graphicmart Agency</span>. All rights reserved.</div>
+        <div class="foot-copy">© 2026-2027 <span>Graphicmart</span>. All rights reserved.</div>
         <div class="foot-copy" style="display:flex;gap:16px">
           <a href="#" style="color:var(--gray)">Privacy Policy</a>
           <a href="#" style="color:var(--gray)">Terms of Service</a>
@@ -2700,7 +3316,7 @@
     </div>
   </footer>
 
-  <!-- ══════════════════════════════════
+<!-- ══════════════════════════════════
      JAVASCRIPT
 ══════════════════════════════════ -->
   <script>
@@ -2731,6 +3347,44 @@
       };
       window.addEventListener('scroll', onScroll, { passive: true });
 
+      // Keep navbar visible but offset it below the fixed top-banner so nothing is hidden.
+      const topBanner = document.getElementById('top-banner');
+      const topBannerClose = document.getElementById('top-banner-close');
+      const heroSection = document.getElementById('hero');
+      function updateNavOffset() {
+        if (!nav) return;
+        const bannerHeight = topBanner && getComputedStyle(topBanner).display !== 'none' ? topBanner.offsetHeight : 0;
+        const navHeight = nav.offsetHeight || 0;
+        nav.style.top = bannerHeight + 'px';
+        if (heroSection) {
+          heroSection.style.marginTop = bannerHeight + navHeight + 'px';
+        }
+      }
+      // set initial offset and update on resize for responsive mobile heights
+      updateNavOffset();
+      window.addEventListener('resize', updateNavOffset, { passive: true });
+      // when banner is closed, reset nav and content offset
+      if (topBannerClose) topBannerClose.addEventListener('click', () => {
+        if (topBanner) topBanner.style.display = 'none';
+        updateNavOffset();
+      });
+      // if user scrolls past the banner height, pin nav to top
+      window.addEventListener('scroll', () => {
+        if (!topBanner) return;
+        if (window.scrollY > (topBanner.offsetHeight || 0)) {
+          nav.style.top = '0';
+          if (heroSection) {
+            heroSection.style.marginTop = nav.offsetHeight + 'px';
+          }
+        } else {
+          updateNavOffset();
+        }
+      }, { passive: true });
+
+      // Ensure the Back-to-top button reliably scrolls the page to top
+      const totopBtn = document.getElementById('totop');
+      if (totopBtn) totopBtn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
       /* ─── HAMBURGER ─── */
       const hbg = document.getElementById('hbg'), mob = document.getElementById('mob');
       hbg.addEventListener('click', () => { const o = hbg.classList.toggle('open'); mob.classList.toggle('open', o); hbg.setAttribute('aria-expanded', o) });
@@ -2738,25 +3392,8 @@
       function closeMob() { hbg.classList.remove('open'); mob.classList.remove('open'); hbg.setAttribute('aria-expanded', false) }
       window.closeMob = closeMob;
 
-      /* ─── PARTICLES ─── */
-      const cv = document.getElementById('pcanvas'), ctx = cv.getContext('2d');
-      let W, H, pts = [];
-      function resize() { W = cv.width = cv.offsetWidth; H = cv.height = cv.offsetHeight }
-      resize(); window.addEventListener('resize', () => { resize(); init() }, { passive: true });
-      function init() { pts = []; for (let i = 0; i < 70; i++)pts.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + .4, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35, a: Math.random() * .4 + .08, c: Math.random() > .5 ? '220,38,38' : '249,115,22' }) }
-      init();
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        pts.forEach(p => {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0) p.x = W; if (p.x > W) p.x = 0; if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.c},${p.a})`; ctx.fill();
-          pts.forEach(q => { const d = Math.hypot(p.x - q.x, p.y - q.y); if (d < 90) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = `rgba(${p.c},${.05 * (1 - d / 90)})`; ctx.lineWidth = .5; ctx.stroke() } });
-        });
-        requestAnimationFrame(draw);
-      }
-      draw();
+      /* ─── PARTICLES (disabled — hero is pure image) ─── */
+      // canvas hidden, skip particle animation
 
       /* ─── HERO PARALLAX ─── */
       document.addEventListener('mousemove', e => {
@@ -2764,10 +3401,76 @@
         document.querySelectorAll('.blob').forEach((b, i) => { b.style.transform = `translate(${dx * (i + 1) * .45}px,${dy * (i + 1) * .45}px)` });
       }, { passive: true });
 
+      /* ─── HERO SLIDER ─── */
+      const heroImages = [
+        'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&auto=format&fit=crop&q=90',
+        'https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=1920&auto=format&fit=crop&q=90'
+      ];
+      const heroImg = document.getElementById('heroImg');
+      const heroDots = document.getElementById('heroDots');
+      const heroPrev = document.getElementById('heroPrev');
+      const heroNext = document.getElementById('heroNext');
+      let heroIndex = 0;
+      let heroTimer;
+
+      function updateHeroSlide() {
+        heroImg.style.opacity = '0';
+        setTimeout(() => {
+          heroImg.src = heroImages[heroIndex];
+          heroImg.alt = `Graphicmart slide ${heroIndex + 1}`;
+          heroImg.style.opacity = '1';
+        }, 120);
+        heroDots.querySelectorAll('.hero-slider-dot').forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === heroIndex);
+        });
+      }
+
+      function renderHeroDots() {
+        heroDots.innerHTML = '';
+        heroImages.forEach((_, idx) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'hero-slider-dot' + (idx === heroIndex ? ' active' : '');
+          dot.addEventListener('click', () => {
+            heroIndex = idx;
+            updateHeroSlide();
+            resetHeroTimer();
+          });
+          heroDots.appendChild(dot);
+        });
+      }
+
+      function nextHeroSlide() {
+        heroIndex = (heroIndex + 1) % heroImages.length;
+        updateHeroSlide();
+      }
+
+      function prevHeroSlide() {
+        heroIndex = (heroIndex - 1 + heroImages.length) % heroImages.length;
+        updateHeroSlide();
+      }
+
+      function resetHeroTimer() {
+        clearInterval(heroTimer);
+        heroTimer = setInterval(nextHeroSlide, 5000);
+      }
+
+      heroPrev.addEventListener('click', () => { prevHeroSlide(); resetHeroTimer(); });
+      heroNext.addEventListener('click', () => { nextHeroSlide(); resetHeroTimer(); });
+      document.querySelector('.hero-slider').addEventListener('mouseenter', () => clearInterval(heroTimer));
+      document.querySelector('.hero-slider').addEventListener('mouseleave', resetHeroTimer);
+      renderHeroDots();
+      resetHeroTimer();
+
       /* ─── TYPING EFFECT ─── */
+      const tel = document.getElementById('typed');
+      if (tel) {
       const words = ['Website Design', 'Graphic Design', 'Video Editing', 'SEO Optimization', 'Landing Pages', 'Social Media Branding'];
       let wi = 0, ci = 0, del = false;
-      const tel = document.getElementById('typed');
       const st = document.createElement('style');
       st.textContent = '@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}';
       document.head.appendChild(st);
@@ -2778,6 +3481,7 @@
         setTimeout(type, del ? 48 : 78);
       }
       type();
+      }
 
       /* ─── SCROLL REVEAL ─── */
       const ro = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target) } }) }, { threshold: .1 });
@@ -2812,24 +3516,7 @@
         });
       });
 
-      /* ─── TESTIMONIALS ─── */
-      const track = document.getElementById('tmtrack'), cards = [...track.querySelectorAll('.tm-card')];
-      const dotsW = document.getElementById('tmdots');
-      let ti = 0, ta;
-      cards.forEach((_, i) => { const d = document.createElement('div'); d.className = 'tmd' + (i === 0 ? ' on' : ''); d.addEventListener('click', () => goTo(i)); dotsW.appendChild(d) });
-      function goTo(i) {
-        ti = i;
-        const cw = cards[0].offsetWidth + 22;
-        const maxS = (cards.length - 1) * cw;
-        track.style.transform = `translateX(-${Math.min(ti * cw, maxS)}px)`;
-        document.querySelectorAll('.tmd').forEach((d, j) => d.classList.toggle('on', j === ti));
-      }
-      document.getElementById('tmprev').addEventListener('click', () => goTo((ti - 1 + cards.length) % cards.length));
-      document.getElementById('tmnext').addEventListener('click', () => goTo((ti + 1) % cards.length));
-      ta = setInterval(() => goTo((ti + 1) % cards.length), 4200);
-      track.addEventListener('mouseenter', () => clearInterval(ta));
-      track.addEventListener('mouseleave', () => { ta = setInterval(() => goTo((ti + 1) % cards.length), 4200) });
-      window.addEventListener('resize', () => goTo(ti));
+      /* Testimonials are now rendered as static cards; carousel behavior has been removed. */
 
       /* ─── CONTACT FORM ─── */
       const submitContactForm = async (submission) => {
@@ -2886,6 +3573,6 @@
       });
     })();
   </script>
-</body>
+  </body>
 
 </html>
