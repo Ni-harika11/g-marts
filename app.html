@@ -710,15 +710,26 @@
     }
 
     @media(max-width: 900px) {
-      #hero { height: 48vh; max-height: 480px }
+      #hero { height: 50vh; max-height: 520px; min-height: 280px }
+      .hero-slider-controls { bottom: 18px; right: 18px }
+      .hero-slider-controls button { width: 40px; height: 40px }
+      .hero-slider-dots { bottom: 18px; left: 18px }
     }
 
     @media(max-width: 680px) {
-      #hero { height: 42vh; max-height: 420px }
+      #hero { height: 48vh; max-height: 440px; min-height: 260px }
+      .hero-slider-controls { bottom: 16px; right: 16px }
+      .hero-slider-controls button { width: 38px; height: 38px; font-size: .95rem }
+      .hero-slider-dots { bottom: 16px; left: 16px; gap: 8px }
+      .hero-slider-dot { width: 9px; height: 9px }
     }
 
     @media(max-width: 520px) {
-      #hero { height: 38vh; max-height: 360px; min-height: 280px }
+      #hero { height: 42vh; max-height: 360px; min-height: 240px }
+      .hero-slider-controls { bottom: 14px; right: 14px; gap: 8px }
+      .hero-slider-controls button { width: 34px; height: 34px; font-size: .9rem }
+      .hero-slider-dots { bottom: 14px; left: 14px }
+      .hero-slider-dot { width: 8px; height: 8px }
     }
 
     .h-grid {
@@ -2669,7 +2680,7 @@
       <img
         id="heroImg"
         class="h-cover-img"
-        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&auto=format&fit=crop&q=90"
+        src="image-1.png"
         alt="Graphicmart Digital Creative Agency"
         loading="eager"
         fetchpriority="high"
@@ -3403,12 +3414,12 @@
 
       /* ─── HERO SLIDER ─── */
       const heroImages = [
-        'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&auto=format&fit=crop&q=90',
-        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&auto=format&fit=crop&q=90',
-        'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1920&auto=format&fit=crop&q=90',
-        'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&auto=format&fit=crop&q=90',
-        'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&auto=format&fit=crop&q=90',
-        'https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=1920&auto=format&fit=crop&q=90'
+        'image-1.png',
+        'image-2.png',
+        'image-3.png',
+        'image-4.png',
+        'image-5.png',
+        'image-6.png'
       ];
       const heroImg = document.getElementById('heroImg');
       const heroDots = document.getElementById('heroDots');
